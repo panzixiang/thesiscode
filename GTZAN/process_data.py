@@ -66,8 +66,8 @@ def main():
     Y = np.array(labels_shuf)
 
     kf = KFold(1000, n_folds=10)
-    #cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
-    cla = svm.SVC(kernel='linear')
+    cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
+    #cla = svm.SVC(kernel='linear')
     ada = AdaBoostClassifier(base_estimator=cla, n_estimators=100, learning_rate=1.0, algorithm='SAMME', random_state=None)
     
     scores = 0.0
