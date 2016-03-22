@@ -70,11 +70,11 @@ def main():
     cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     #cla = svm.SVC(kernel='linear')
     ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
-    n_estimators=100,
+    n_estimators=400,
     learning_rate=1,
     algorithm="SAMME",
     random_state=None)
-    n_estimators = 100
+    n_estimators = 400
     scores = 0.0
     cm_all = np.zeros((10,10), dtype=np.int)
     for train, test in kf:
