@@ -1,7 +1,6 @@
 #ignore matlab data files
 *.mat
 *.csv
-*.p
 *.fig
 
 #ignore latex file
