@@ -7,6 +7,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn import svm
 from sklearn.metrics import zero_one_loss
 from sklearn.metrics import confusion_matrix
@@ -68,7 +69,11 @@ def main():
     kf = KFold(1000, n_folds=10)
     cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     #cla = svm.SVC(kernel='linear')
-    ada = AdaBoostClassifier(base_estimator=cla, n_estimators=100, learning_rate=1.0, algorithm='SAMME', random_state=None)
+    ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
+    n_estimators=100,
+    learning_rate=1,
+    algorithm="SAMME",
+    random_state=None)
     n_estimators = 100
     scores = 0.0
     cm_all = np.zeros((10,10), dtype=np.int)
