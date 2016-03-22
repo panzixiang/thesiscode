@@ -86,10 +86,10 @@ def main():
         cm_all = np.add(cm_all, cm)
     
     print scores/10
-    plt.figure()
-    plot_confusion_matrix(cm_all)
+    #plt.figure()
+    #plot_confusion_matrix(cm_all)
 
-    plt.show()
+    #plt.show()
     
 def combineFeatures(features):
     l = []
