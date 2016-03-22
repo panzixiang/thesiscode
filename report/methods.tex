@@ -1,0 +1,42 @@
+As we approached this classification problem, we decided to begin by visualizing the data in order to gain some understanding of how the song samples differed across genre. Afterwards, we began running classification trials and comparing results. In these trials, we varied each of the following properties: features considered, classifiers used, and methods of combining the results of multiple classifiers.
+
+\subsection{Data Visualization}
+First we did preliminary analysis of the song data, namely looking at the time-average mean of MFCC coefficients for each genre to verify that there is a measurable difference between genres. We also did a visualization of the dataset by projecting the MFCC feature and HCDF feature using t-distributed stochastic neighborhood embedding (t-sne) \cite{tsne} to verify that clustering based algorithms are viable for classifying this dataset.
+
+\subsection{Trial Design}
+We did 10-fold CV with zero-one loss to calculate the cross validation error of each feature set and classifier. The dataset is first shuffled and the training dataset is sampled proportional to the label (i.e each training set of 900 will contain all 10 labels in equal proportion).
+
+\subsection{Features}
+Initially, we selected five features (described in Figure \ref{fig:featureSet}) that cover different parts of the feature spaces extracted with MIRtoolbox \cite{MIR}: MFCC, Chroma, Energy, Spectral Flux, and HCDF. We then used the provided scripts to load the song samples in .mat format and extract the five features from each sample. Because each feature considered is a frame-level feature and therefore high dimensional, we used the provided scripts to apply Fisher Vectors to each feature to generate descriptors before converting the results into .csv format. 
+
+Once we had completed the extraction and quantization process, we experimented with varying the features considered in three ways.
+
+\subsubsection{Experiment 1: Combinations of Features using Fisher Vectors across classifiers}
+In this experiment, we ran trials for every combination of the five features encoded with Fisher Vectors. For each of eight classifiers considered, we collected the results of predicting based on each possible combination. We used the following classifiers:
+
+\begin{tabular}{lll}
+	Clustering classifiers:     &  & K-Nearest Neighbors \cite{knn} (KNN3, KNN5)                                                                                                                  \\
+	Generative classifiers:     &  & Gaussian Naive Bayes \cite{gnb} (GNB)                                                                                                                        \\
+	Discriminative classifiers: &  & \begin{tabular}[c]{@{}l@{}}Linear-, Quadratic Discriminant Analysis\cite{lda}\cite{qda} (LDA, QDA), \\ SVM (linear, and rbf kernels)\cite{svm}, Random forest\cite{rf} (RF)\end{tabular}
+\end{tabular}
+
+We used the scikit-learn implementations of these classifiers \cite{scikit-learn}. Our code was based on the examples provided in the scikit-learn documentation pages cited above.
+
+\subsubsection{Experiment 2: Using MFCC and Chroma Raw Data}
+The goal of this experiment was to compare the performance of Fisher Vector-generated descriptors with the performance of MFCC and Chroma raw data. We extracted the first 1000 frames of each song and concatenated the features to form a $32000\times 1000$ matrix for MFCC and $12000\times 1000$ matrix for chroma, then we used PCA and t-sne to project the data down to a 900-dimensional feature to maintain a feature-sample ratio of less than 1. We then compared the performance of these matrices with the corresponding Fisher Vector matrices.
+
+\subsection{Classifier Combinations}
+Once we had collected the results achieved by single classifiers, we decided to try pooling the predictions of several classifiers into a single set of predictions. Therefore, we experimented with hard voting and soft voting using our best-performing classifiers.
+
+\subsubsection{Experiment 1: Hard Voting}
+In this experiment, we ran trials in which three classifiers - 5-Nearest Neighbors, Linear SVM, and Gaussian Naive Bayes - engaged in a hard vote to determine the final classification of a sample. This means that each classifier cast one vote per sample considered. Performance across each combination of FV features was considered.
+
+\subsubsection{Experiment 2: Soft Voting} In this experiment, we conducted a soft vote of four classifiers: 5-Nearest Neighbors, Linear SVM, Gaussian Naive Bayes, and Random Forest with a forest of 50 trees. The best performing classifier, Linear SVM, was weighted double. Again, performance across each combination of FV features was considered.
+
+
+
+
+
+
+
+

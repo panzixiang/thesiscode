@@ -1,0 +1,19 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related Work}{}% 2
+\BOOKMARK [1][-]{section.3}{Methods}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Data Visualization}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Trial Design}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Features}{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Experiment 1: Combinations of Features using Fisher Vectors across classifiers}{subsection.3.3}% 7
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Experiment 2: Using MFCC and Chroma Raw Data}{subsection.3.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Classifier Combinations}{section.3}% 9
+\BOOKMARK [3][-]{subsubsection.3.4.1}{Experiment 1: Hard Voting}{subsection.3.4}% 10
+\BOOKMARK [3][-]{subsubsection.3.4.2}{Experiment 2: Soft Voting}{subsection.3.4}% 11
+\BOOKMARK [1][-]{section.4}{Results}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Preliminary Analysis}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Combinations of features with different classifiers}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{Fisher vectors vs PCA of raw timeframe data}{section.4}% 15
+\BOOKMARK [1][-]{section.5}{Discussion and Conclusion}{}% 16
+\BOOKMARK [2][-]{subsection.5.1}{Confusion matrix}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{Classifiers and features}{section.5}% 18
+\BOOKMARK [1][-]{section.6}{Appendix}{}% 19
