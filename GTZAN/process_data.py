@@ -81,11 +81,11 @@ def main():
         # print predictions
         # print "----------Adaboost errors -------------"
         ada_discrete_err = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(cla.staged_predict(X_test)):
+        for i, y_pred in enumerate(ada.staged_predict(X_test)):
             ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
 
         ada_discrete_err_train = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(cla.staged_predict(X_train)):
+        for i, y_pred in enumerate(ada.staged_predict(X_train)):
             ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
         print "----------training errors -------------"
         print ada_discrete_err_train        
