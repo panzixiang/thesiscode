@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn import svm
 from sklearn.metrics import zero_one_loss
 from sklearn.metrics import confusion_matrix
