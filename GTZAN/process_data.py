@@ -69,7 +69,7 @@ def main():
     #cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     cla = svm.SVC(kernel='linear')
     ada = AdaBoostClassifier(base_estimator=cla, n_estimators=100, learning_rate=1.0, algorithm='SAMME', random_state=None)
-    
+    n_estimators = 100
     scores = 0.0
     cm_all = np.zeros((10,10), dtype=np.int)
     for train, test in kf:
@@ -79,7 +79,18 @@ def main():
         scores += zero_one_loss(predictions, y_test)
         # print y_test
         # print predictions
-        
+        # print "----------Adaboost errors -------------"
+        ada_discrete_err = np.zeros((n_estimators,))
+        for i, y_pred in enumerate(cla.staged_predict(X_test)):
+            ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
+
+        ada_discrete_err_train = np.zeros((n_estimators,))
+        for i, y_pred in enumerate(cla.staged_predict(X_train)):
+            ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
+        print "----------training errors -------------"
+        print ada_discrete_err_train        
+        print "----------test errors -------------"
+        print ada_discrete_err
 
         # Compute confusion matrix
         cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
