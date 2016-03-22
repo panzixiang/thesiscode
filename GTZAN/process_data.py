@@ -67,13 +67,14 @@ def main():
     kf = KFold(1000, n_folds=10)
     #cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     cla = svm.SVC(kernel='linear')
+    ada = AdaBoostClassifier(base_estimator=cla, n_estimators=100, learning_rate=1.0, algorithm='SAMME', random_state=None)
     
     scores = 0.0
     cm_all = np.zeros((10,10), dtype=np.int)
     for train, test in kf:
         X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
-        cla.fit(X_train, y_train)
-        predictions = cla.predict(X_test)
+        ada.fit(X_train, y_train)
+        predictions = ada.predict(X_test)
         scores += zero_one_loss(predictions, y_test)
         # print y_test
         # print predictions
