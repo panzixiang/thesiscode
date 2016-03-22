@@ -33,7 +33,7 @@ def main(arg):
     elif arg[0] == 'qda':
         cla = QuadraticDiscriminantAnalysis()
     elif arg[0] == 'svmLin':
-        cla = svm.SVC(kernel='linear')
+        cla = svm.SVC(kernel='linear', decision_function_shape='ovo')
     elif arg[0] == 'linearSVC':
         cla = svm.LinearSVC()    
     elif arg[0] == 'svmRbf':
@@ -110,8 +110,8 @@ def runTrial(cla, claName, featList, labels):
         predictions = cla.predict(X_test)
         print zero_one_loss(predictions, y_test)
         scores += zero_one_loss(predictions, y_test)
-        # print adaboost errors
-        print "----------Adaboost errors -------------"
+
+        # print "----------Adaboost errors -------------"
         ada_discrete_err = np.zeros((n_estimators,))
         for i, y_pred in enumerate(cla.staged_predict(X_test)):
             ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
@@ -124,6 +124,7 @@ def runTrial(cla, claName, featList, labels):
         print "----------test errors -------------"
         print ada_discrete_err    
 
+    scores = scores/10
     # scores = cross_validation.cross_val_score(cla, X, Y, scoring='accuracy', cv=10)
 
     print claName + "," + printFeatures(featList)
