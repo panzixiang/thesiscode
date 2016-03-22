@@ -34,6 +34,8 @@ def main(arg):
         cla = QuadraticDiscriminantAnalysis()
     elif arg[0] == 'svmLin':
         cla = svm.SVC(kernel='linear')
+    elif arg[0] == 'linearSVC':
+        cla = svm.LinearSVC()    
     elif arg[0] == 'svmRbf':
         cla = svm.SVC(kernel='rbf')
     elif arg[0] == 'svmSig':
@@ -71,6 +73,7 @@ def main(arg):
         featStr, error = runTrial(ada, arg[0], l, labels)
         outcomes[featStr] = error
 
+
     outcomesSorted = sorted(outcomes.items(), key=operator.itemgetter(1))
     
     #print "-------------"
@@ -100,13 +103,27 @@ def runTrial(cla, claName, featList, labels):
     Y = np.array(labels_shuf)
     scores = 0.0
     kf = KFold(1000, n_folds=10)
-    # for train, test in kf:
-    #    X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
-    #    cla.fit(X_train, y_train)
-    #    predictions = cla.predict(X_test)
-    #    print zero_one_loss(predictions, y_test)
-    #    scores += zero_one_loss(predictions, y_test)
-    scores = cross_validation.cross_val_score(cla, X, Y, scoring='accuracy', cv=10)
+    for train, test in kf:
+        X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
+        cla.fit(X_train, y_train)
+        predictions = cla.predict(X_test)
+        print zero_one_loss(predictions, y_test)
+        scores += zero_one_loss(predictions, y_test)
+        # print adaboost errors
+        print "----------Adaboost errors -------------"
+        ada_discrete_err = np.zeros((n_estimators,))
+        for i, y_pred in enumerate(ada_discrete.staged_predict(X_test)):
+            ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
+
+        ada_discrete_err_train = np.zeros((n_estimators,))
+        for i, y_pred in enumerate(ada_discrete.staged_predict(X_train)):
+            ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
+        print "----------training errors -------------"
+        print ada_discrete_err_train        
+        print "----------test errors -------------"
+        print ada_discrete_err    
+
+    # scores = cross_validation.cross_val_score(cla, X, Y, scoring='accuracy', cv=10)
 
     print claName + "," + printFeatures(featList)
     print 1 - np.mean(scores)
