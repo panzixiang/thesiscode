@@ -92,11 +92,19 @@ def main():
         ada_discrete_err_train = np.zeros((n_estimators,))
         for i, y_pred in enumerate(ada.staged_predict(X_train)):
             ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
+
+        myfile = open('outDtree_test', 'wb')
+        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        wr.writerow(ada_discrete_err)
+        myfile = open('outDtree_train', 'wb')
+        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        wr.writerow(ada_discrete_err_train)
+        '''
         print "----------training errors -------------"
         print ada_discrete_err_train        
         print "----------test errors -------------"
         print ada_discrete_err
-
+        '''
         # Compute confusion matrix
         cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
         np.set_printoptions(precision=2)
