@@ -3,6 +3,9 @@
 *.csv
 *.fig
 
+#ignore test outputs
+GTZAN/out.txt
+
 #ignore latex file
 report/cos424_template.aux
 report/cos424_template.pdf

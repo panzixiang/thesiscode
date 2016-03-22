@@ -102,6 +102,7 @@ def runTrial(cla, claName, featList, labels):
     X = np.array(feats_shuf)
     Y = np.array(labels_shuf)
     scores = 0.0
+    n_estimators = 100
     kf = KFold(1000, n_folds=10)
     for train, test in kf:
         X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
@@ -112,11 +113,11 @@ def runTrial(cla, claName, featList, labels):
         # print adaboost errors
         print "----------Adaboost errors -------------"
         ada_discrete_err = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(ada_discrete.staged_predict(X_test)):
+        for i, y_pred in enumerate(cla.staged_predict(X_test)):
             ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
 
         ada_discrete_err_train = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(ada_discrete.staged_predict(X_train)):
+        for i, y_pred in enumerate(cla.staged_predict(X_train)):
             ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
         print "----------training errors -------------"
         print ada_discrete_err_train        
