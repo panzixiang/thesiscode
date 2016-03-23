@@ -77,6 +77,13 @@ def main():
     n_estimators = 400
     scores = 0.0
     cm_all = np.zeros((10,10), dtype=np.int)
+   
+    with open('outDtree_test.csv','w') as f1:
+        wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
+
+    with open('outDtree_train.csv', 'wb') as f2:
+        wrtrain = csv.writer(f2, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
+ 
     for train, test in kf:
         X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
         ada.fit(X_train, y_train)
@@ -93,12 +100,8 @@ def main():
         for i, y_pred in enumerate(ada.staged_predict(X_train)):
             ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
 
-        myfile = open('outDtree_test', 'wb')
-        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-        wr.writerow(ada_discrete_err)
-        myfile = open('outDtree_train', 'wb')
-        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-        wr.writerow(ada_discrete_err_train)
+            wrtest.writerow(ada_discrete_err)
+            wrtrain.writerow(ada_discrete_err_train)
         '''
         print "----------training errors -------------"
         print ada_discrete_err_train        
