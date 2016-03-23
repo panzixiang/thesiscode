@@ -47,27 +47,27 @@ def main():
             training.append(featureDict[i])
             trainingLB.append(int(labels[i]))
 
-            # fit with classifier and predict
-            X = np.array(training)
-            Y = np.array(trainingLB)
+    # fit with classifier and predict
+    X = np.array(training)
+    Y = np.array(trainingLB)
 
-            '''
-            l=[allsongcat]
-            all_feats = combineFeatures(l)
-            feats_shuf = []
-            labels_shuf = []
-            index_shuf = range(len(labels))
-            shuffle(index_shuf)
-            for i in index_shuf:
-                feats_shuf.append(all_feats[i])
-                labels_shuf.append(labels[i])
+    '''
+    l=[allsongcat]
+    all_feats = combineFeatures(l)
+    feats_shuf = []
+    labels_shuf = []
+    index_shuf = range(len(labels))
+    shuffle(index_shuf)
+    for i in index_shuf:
+        feats_shuf.append(all_feats[i])
+        labels_shuf.append(labels[i])
 
 
-                X = np.array(feats_shuf)
-                Y = np.array(labels_shuf)
+        X = np.array(feats_shuf)
+        Y = np.array(labels_shuf)
 
-                kf = KFold(1000, n_folds=10)
-                cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
+    kf = KFold(1000, n_folds=10)
+    cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     #cla = svm.SVC(kernel='linear')
     ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
         n_estimators=400,
