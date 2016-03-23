@@ -18,7 +18,7 @@ from random import shuffle
 
 # confusion matrix plotting code from: http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#example-model-selection-plot-confusion-matrix-py
 def main():
-
+    
     filenameLB = 'mfcc_lb.csv'
     allsongcat = pickle.load(open('mfcc_fv.p', 'rb'))
     #hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
@@ -27,7 +27,7 @@ def main():
         reader = csv.reader(f)
         for row in reader:
             labels = row
-
+     
     # select training and test sets
     '''
     TEidx = np.array(random.sample(range(0,1000), 100))
@@ -46,7 +46,7 @@ def main():
         else:
             training.append(featureDict[i])
             trainingLB.append(int(labels[i]))
-
+        
     # fit with classifier and predict
     X = np.array(training)
     Y = np.array(trainingLB)
@@ -63,27 +63,27 @@ def main():
         labels_shuf.append(labels[i])
 
 
-        X = np.array(feats_shuf)
-        Y = np.array(labels_shuf)
+    X = np.array(feats_shuf)
+    Y = np.array(labels_shuf)
 
     kf = KFold(1000, n_folds=10)
     cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     #cla = svm.SVC(kernel='linear')
     ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
-        n_estimators=400,
-        learning_rate=1,
-        algorithm="SAMME",
-        random_state=None)
+    n_estimators=400,
+    learning_rate=1,
+    algorithm="SAMME",
+    random_state=None)
     n_estimators = 400
     scores = 0.0
     cm_all = np.zeros((10,10), dtype=np.int)
-
+   
     with open('outDtree_test.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
 
         with open('outDtree_train.csv', 'wb') as f2:
             wrtrain = csv.writer(f2, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
-
+     
             for train, test in kf:
                 X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
                 ada.fit(X_train, y_train)
@@ -100,8 +100,8 @@ def main():
                 for i, y_pred in enumerate(ada.staged_predict(X_train)):
                     ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
 
-                wrtest.writerow(ada_discrete_err)
-                wrtrain.writerow(ada_discrete_err_train)
+                    wrtest.writerow(ada_discrete_err)
+                    wrtrain.writerow(ada_discrete_err_train)
                 '''
                 print "----------training errors -------------"
                 print ada_discrete_err_train        
@@ -113,15 +113,15 @@ def main():
                 np.set_printoptions(precision=2)
                 #print(cm_all)
                 cm_all = np.add(cm_all, cm)
-
-                print scores/10
+    
+    print scores/10
     #plt.figure()
     #plot_confusion_matrix(cm_all)
 
     #plt.show()
     
-    def combineFeatures(features):
-        l = []
+def combineFeatures(features):
+    l = []
     # make total featuresDict
     featureDict = features[0];
     if len(features) > 1:
@@ -129,24 +129,24 @@ def main():
             for i in range(1000):
                 featureDict[i] += features[index][i]
 
-                for i in range(1000):
-                    l.append(featureDict[i])
+    for i in range(1000):
+        l.append(featureDict[i])
 
-                    return l
-
-
-                    def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.YlGnBu):
-                        plt.imshow(cm, interpolation='nearest', cmap='hot', vmin=0, vmax=100)
-                        plt.title(title)
-                        plt.colorbar()
-                        tick_marks = np.arange(10)
-                        plt.xticks(tick_marks, ['Blues', 'Classical', 'Country', 'Disco', 'Hiphop','Jazz', 'Metal', 'Pop', 'Reggae', 'Rock'], rotation=45)
-                        plt.yticks(tick_marks, ['Blues', 'Classical', 'Country', 'Disco', 'Hiphop','Jazz', 'Metal', 'Pop', 'Reggae', 'Rock'])
-                        plt.tight_layout()
-                        plt.ylabel('True label')
-                        plt.xlabel('Predicted label')
+    return l
 
 
+def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.YlGnBu):
+    plt.imshow(cm, interpolation='nearest', cmap='hot', vmin=0, vmax=100)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(10)
+    plt.xticks(tick_marks, ['Blues', 'Classical', 'Country', 'Disco', 'Hiphop','Jazz', 'Metal', 'Pop', 'Reggae', 'Rock'], rotation=45)
+    plt.yticks(tick_marks, ['Blues', 'Classical', 'Country', 'Disco', 'Hiphop','Jazz', 'Metal', 'Pop', 'Reggae', 'Rock'])
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
 
-                        if __name__ == "__main__":
-                            main()
+
+
+if __name__ == "__main__":
+    main()
