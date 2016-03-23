@@ -81,38 +81,38 @@ def main():
     with open('outDtree_test.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
 
-    with open('outDtree_train.csv', 'wb') as f2:
-        wrtrain = csv.writer(f2, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
+        with open('outDtree_train.csv', 'wb') as f2:
+            wrtrain = csv.writer(f2, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
  
-    for train, test in kf:
-        X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
-        ada.fit(X_train, y_train)
-        predictions = ada.predict(X_test)
-        scores += zero_one_loss(predictions, y_test)
-        # print y_test
-        # print predictions
-        # print "----------Adaboost errors -------------"
-        ada_discrete_err = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(ada.staged_predict(X_test)):
-            ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
+            for train, test in kf:
+                X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
+                ada.fit(X_train, y_train)
+                predictions = ada.predict(X_test)
+                scores += zero_one_loss(predictions, y_test)
+                # print y_test
+        	# print predictions
+        	# print "----------Adaboost errors -------------"
+        	ada_discrete_err = np.zeros((n_estimators,))
+        	for i, y_pred in enumerate(ada.staged_predict(X_test)):
+                    ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
 
-        ada_discrete_err_train = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(ada.staged_predict(X_train)):
-            ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
+        	    ada_discrete_err_train = np.zeros((n_estimators,))
+                for i, y_pred in enumerate(ada.staged_predict(X_train)):
+                    ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
 
-            wrtest.writerow(ada_discrete_err)
-            wrtrain.writerow(ada_discrete_err_train)
-        '''
-        print "----------training errors -------------"
-        print ada_discrete_err_train        
-        print "----------test errors -------------"
-        print ada_discrete_err
-        '''
-        # Compute confusion matrix
-        cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-        np.set_printoptions(precision=2)
-        #print(cm_all)
-        cm_all = np.add(cm_all, cm)
+            	    wrtest.writerow(ada_discrete_err)
+            	    wrtrain.writerow(ada_discrete_err_train)
+        	    '''
+        	    print "----------training errors -------------"
+        	    print ada_discrete_err_train        
+        	    print "----------test errors -------------"
+        	    print ada_discrete_err
+            	    '''
+        	    # Compute confusion matrix
+        	    cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+        	    np.set_printoptions(precision=2)
+        	    #print(cm_all)
+        	    cm_all = np.add(cm_all, cm)
     
     print scores/10
     #plt.figure()
