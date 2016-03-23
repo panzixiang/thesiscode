@@ -90,10 +90,10 @@ def main():
                 predictions = ada.predict(X_test)
                 scores += zero_one_loss(predictions, y_test)
                 # print y_test
-        	# print predictions
-        	# print "----------Adaboost errors -------------"
-        	ada_discrete_err = np.zeros((n_estimators,))
-        	for i, y_pred in enumerate(ada.staged_predict(X_test)):
+        	    # print predictions
+        	    # print "----------Adaboost errors -------------"
+        	    ada_discrete_err = np.zeros((n_estimators,))
+        	    for i, y_pred in enumerate(ada.staged_predict(X_test)):
                     ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
 
         	    ada_discrete_err_train = np.zeros((n_estimators,))
