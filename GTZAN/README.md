@@ -5,22 +5,21 @@ MFCC
 Energy
 Chroma
 Brightness
-Spectral Flux
 HCDF
 
-Do at most combination of two features
+try combinations later
 
 ## ML algorithms
-Linear DA
-Quadratic DA
-KNN (3,5)
-SVC - mSVM, linear, radial(gaussian), sigmoid
-RF?
-Diffusion?
+Dtree
+SGD
 
-## Results
-plot feature space against genre
-plot accuracy across ML algorithms for different features
-plot confusion matrix
+## Current results
+mfcc adaboost dtree
+
+
+## Plots
+baseline test error and training error for mfcc adaboost dtree note runtime
+ECOC random matrix for mfcc
+
 
 
