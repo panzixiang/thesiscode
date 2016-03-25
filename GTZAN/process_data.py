@@ -8,6 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn.metrics import zero_one_loss
 from sklearn.metrics import confusion_matrix
@@ -67,9 +68,10 @@ def main():
     Y = np.array(labels_shuf)
 
     kf = KFold(1000, n_folds=10)
-    cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
+    #cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
+    cla = SGDClassifier(loss="hinge", penalty="l2")
     #cla = svm.SVC(kernel='linear')
-    ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
+    ada = AdaBoostClassifier(base_estimator=cla,
     n_estimators=400,
     learning_rate=1,
     algorithm="SAMME",
@@ -78,10 +80,10 @@ def main():
     scores = 0.0
     cm_all = np.zeros((10,10), dtype=np.int)
    
-    with open('outDtree_test.csv','w') as f1:
+    with open('outSGD_test.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
 
-        with open('outDtree_train.csv', 'wb') as f2:
+        with open('outSGD_train.csv', 'wb') as f2:
             wrtrain = csv.writer(f2, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
      
             for train, test in kf:
