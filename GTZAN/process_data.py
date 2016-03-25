@@ -100,8 +100,8 @@ def main():
                 for i, y_pred in enumerate(ada.staged_predict(X_train)):
                     ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
 
-                    wrtest.writerow(ada_discrete_err)
-                    wrtrain.writerow(ada_discrete_err_train)
+                wrtest.writerow(ada_discrete_err)
+                wrtrain.writerow(ada_discrete_err_train)
                 '''
                 print "----------training errors -------------"
                 print ada_discrete_err_train        
