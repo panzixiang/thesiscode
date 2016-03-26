@@ -78,6 +78,7 @@ def main():
     cm_all = np.zeros((10,10), dtype=np.int)
 
     cb = np.zeros((10,20))
+    losses = []
    
     with open('ECOC_error.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
@@ -87,11 +88,12 @@ def main():
             cla.fit(X_train, y_train)
             predictions = cla.predict(X_test)
             loss = zero_one_loss(predictions, y_test)
+            losses.append(loss)
             scores += loss
             # print y_test
             # print predictions
 
-            wrtest.write(loss)
+            
             cb = cla.code_book_
 
             '''
@@ -105,6 +107,7 @@ def main():
             np.set_printoptions(precision=2)
             #print(cm_all)
             cm_all = np.add(cm_all, cm)
+        wrtest.write(losses)    
     print cb
 
     print scores/10
