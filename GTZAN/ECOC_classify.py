@@ -73,11 +73,11 @@ def main():
     #cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     #cla = SGDClassifier(loss="hinge", penalty="l2")
     #cla = svm.SVC(kernel='linear')
-    cla = OutputCodeClassifier(LinearSVC(random_state=0)
+    cla = OutputCodeClassifier(LinearSVC(random_state=0),code_size=2, random_state=0)
 
     cm_all = np.zeros((10,10), dtype=np.int)
 
-    cb = np.zeros[(10,20)]
+    cb = np.zeros((10,20))
    
     with open('ECOC_error.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
