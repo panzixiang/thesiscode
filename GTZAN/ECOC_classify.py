@@ -107,7 +107,8 @@ def main():
             np.set_printoptions(precision=2)
             #print(cm_all)
             cm_all = np.add(cm_all, cm)
-        wrtest.write(losses)    
+        for i in losses:
+        wrtest.writerow(losses)    
     print cb
 
     print scores/10
