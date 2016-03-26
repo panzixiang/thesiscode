@@ -81,7 +81,7 @@ def main():
    
     with open('ECOC_error.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
-
+        scores = 0.0
         for train, test in kf:
             X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
             cla.fit(X_train, y_train)
@@ -91,7 +91,7 @@ def main():
             # print y_test
             # print predictions
 
-            wrtest.writerow(loss)\
+            wrtest.write(loss)
             cb = cla.code_book_
 
             '''
