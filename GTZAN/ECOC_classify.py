@@ -92,22 +92,20 @@ def main():
             scores += loss
             # print y_test
             # print predictions
-
-            
+                        
             cb = cla.code_book_
 
-            '''
-            print "----------training errors -------------"
-            print ada_discrete_err_train        
-            print "----------test errors -------------"
-            print ada_discrete_err
-            '''
             # Compute confusion matrix
             cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
             np.set_printoptions(precision=2)
             #print(cm_all)
             cm_all = np.add(cm_all, cm)
+        
+        # make ECOC coding matrix 0-1 binary
         for i in losses:
+            if i <= 0:
+                i = 0
+
         wrtest.writerow(losses)    
     print cb
 
