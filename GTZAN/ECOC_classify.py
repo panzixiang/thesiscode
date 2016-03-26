@@ -102,10 +102,7 @@ def main():
             cm_all = np.add(cm_all, cm)
         
         # make ECOC coding matrix 0-1 binary
-        for i in losses:
-            if i <= 0:
-                i = 0
-
+        cb[cb <= 0] = 0
         wrtest.writerow(losses)    
     print cb
 
