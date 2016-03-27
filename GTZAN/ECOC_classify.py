@@ -71,9 +71,9 @@ def main():
 
     kf = KFold(1000, n_folds=10)
     #cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
-    #cla = SGDClassifier(loss="hinge", penalty="l2")
+    sgd = SGDClassifier(loss="hinge", penalty="l2")
     #cla = svm.SVC(kernel='linear')
-    cla = OutputCodeClassifier(LinearSVC(random_state=0),code_size=2, random_state=0)
+    cla = OutputCodeClassifier(sgd,code_size=2, random_state=0)
 
     cm_all = np.zeros((10,10), dtype=np.int)
 
@@ -94,6 +94,8 @@ def main():
             # print predictions
                         
             cb = cla.code_book_
+
+            np.savetxt('codebook.csv', cb, delimiter=',')
 
             # Compute confusion matrix
             cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
