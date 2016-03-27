@@ -70,10 +70,11 @@ def main():
     Y = np.array(labels_shuf)
 
     kf = KFold(1000, n_folds=10)
-    #cla = RandomForestClassifier(n_estimators=50, max_features = 'log2')
-    sgd = SGDClassifier(loss="hinge", penalty="l2")
-    #cla = svm.SVC(kernel='linear')
-    cla = OutputCodeClassifier(sgd,code_size=2, random_state=0)
+    #rf = RandomForestClassifier(n_estimators=50, max_features = 'log2')
+    #sgd = SGDClassifier(loss="hinge", penalty="l2")
+    #svc = svm.SVC(kernel='linear')
+    lsvc = LinearSVC(random_state=0)
+    cla = OutputCodeClassifier(lsvc,code_size=2, random_state=0)
 
     cm_all = np.zeros((10,10), dtype=np.int)
 
