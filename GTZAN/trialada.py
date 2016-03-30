@@ -50,9 +50,9 @@ def main(arg):
 
     # open all pickles
     mfcc = pickle.load(open('mfcc_fv.p', 'rb'))
-    #chroma = pickle.load(open('chroma_fv.p', 'rb'))
-    #energy = pickle.load(open('energy_fv.p', 'rb'))
-    #brightness = pickle.load(open('brightness_fv.p', 'rb'))
+    chroma = pickle.load(open('chroma_fv.p', 'rb'))
+    energy = pickle.load(open('energy_fv.p', 'rb'))
+    brightness = pickle.load(open('brightness_fv.p', 'rb'))
     hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
 
     # get labels
@@ -62,7 +62,8 @@ def main(arg):
             labels = row
 
     # build Adaboost
-    cla = SGDClassifier(loss="hinge", penalty="l2")
+    #cla = SGDClassifier(loss="hinge", penalty="l2")
+    cla =RandomForestClassifier(n_estimators=50, max_features = 'log2')
     ada = AdaBoostClassifier(base_estimator=cla,
     n_estimators=400,
     learning_rate=1,
