@@ -121,7 +121,7 @@ def runTrial(cla, claName, featList, labels):
             for train, test in kf:
                 X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
                 cla.fit(X_train, y_train)
-                predictions = ada.predict(X_test)
+                predictions = cla.predict(X_test)
                 scores += zero_one_loss(predictions, y_test)
                 # print y_test
                 # print predictions
