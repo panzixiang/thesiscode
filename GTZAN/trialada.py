@@ -143,10 +143,10 @@ def runTrial(cla, claName, featList, labels):
                 print ada_discrete_err
                 '''
                 # Compute confusion matrix
-                cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-                np.set_printoptions(precision=2)
+                #cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+                #np.set_printoptions(precision=2)
                 #print(cm_all)
-                cm_all = np.add(cm_all, cm)
+                #cm_all = np.add(cm_all, cm)
     
     print scores/10
     #plt.figure()
