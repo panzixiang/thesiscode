@@ -52,7 +52,7 @@ def main(arg):
     #chroma = pickle.load(open('chroma_fv.p', 'rb'))
     #energy = pickle.load(open('energy_fv.p', 'rb'))
     #brightness = pickle.load(open('brightness_fv.p', 'rb'))
-    #hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
+    hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
 
     # get labels
     with open('mfcc_lb.csv') as f:
@@ -61,12 +61,19 @@ def main(arg):
             labels = row
 
     # build Adaboost
-    ada = AdaBoostClassifier(base_estimator=cla, n_estimators=400, learning_rate=1.0, algorithm='SAMME', random_state=None)        
+    cla = SGDClassifier(loss="hinge", penalty="l2")
+    ada = AdaBoostClassifier(base_estimator=cla,
+    n_estimators=400,
+    learning_rate=1,
+    algorithm="SAMME",
+    random_state=None)
+    n_estimators = 400
+    #ada = AdaBoostClassifier(base_estimator=cla, n_estimators=400, learning_rate=1.0, algorithm='SAMME', random_state=None)        
 
     # for loop each feature, selecting the two highest
     featureCombos = []
     for i in range(5):
-        featureCombos += list(itertools.combinations([mfcc], i+1));
+        featureCombos += list(itertools.combinations([mfcc, hcdf], i+1));
     outcomes = {}
 
     for l in featureCombos:
@@ -104,27 +111,47 @@ def runTrial(cla, claName, featList, labels):
     scores = 0.0
     n_estimators = 400
     kf = KFold(1000, n_folds=10)
-    for train, test in kf:
-        X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
-        cla.fit(X_train, y_train)
-        predictions = cla.predict(X_test)
-        print zero_one_loss(predictions, y_test)
-        scores += zero_one_loss(predictions, y_test)
+    with open('outSGD_test.csv','w') as f1:
+        wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
 
-        # print "----------Adaboost errors -------------"
-        ada_discrete_err = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(cla.staged_predict(X_test)):
-            ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
+        with open('outSGD_train.csv', 'wb') as f2:
+            wrtrain = csv.writer(f2, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
+     
+            for train, test in kf:
+                X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
+                cla.fit(X_train, y_train)
+                predictions = ada.predict(X_test)
+                scores += zero_one_loss(predictions, y_test)
+                # print y_test
+                # print predictions
+                # print "----------Adaboost errors -------------"
+                ada_discrete_err = np.zeros((n_estimators,))
+                for i, y_pred in enumerate(cla.staged_predict(X_test)):
+                    ada_discrete_err[i] = zero_one_loss(y_pred, y_test)
 
-        ada_discrete_err_train = np.zeros((n_estimators,))
-        for i, y_pred in enumerate(cla.staged_predict(X_train)):
-            ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
-        print "----------training errors -------------"
-        print ada_discrete_err_train        
-        print "----------test errors -------------"
-        print ada_discrete_err    
+                ada_discrete_err_train = np.zeros((n_estimators,))
+                for i, y_pred in enumerate(cla.staged_predict(X_train)):
+                    ada_discrete_err_train[i] = zero_one_loss(y_pred, y_train)
 
-    scores = scores/10
+                wrtest.writerow(ada_discrete_err)
+                wrtrain.writerow(ada_discrete_err_train)
+                '''
+                print "----------training errors -------------"
+                print ada_discrete_err_train        
+                print "----------test errors -------------"
+                print ada_discrete_err
+                '''
+                # Compute confusion matrix
+                cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+                np.set_printoptions(precision=2)
+                #print(cm_all)
+                cm_all = np.add(cm_all, cm)
+    
+    print scores/10
+    #plt.figure()
+    #plot_confusion_matrix(cm_all)
+
+    #plt.show()
     # scores = cross_validation.cross_val_score(cla, X, Y, scoring='accuracy', cv=10)
 
     print claName + "," + printFeatures(featList)
