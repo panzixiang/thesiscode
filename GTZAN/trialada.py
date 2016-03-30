@@ -8,6 +8,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.cross_validation import KFold
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn import metrics
 from sklearn.metrics import zero_one_loss
