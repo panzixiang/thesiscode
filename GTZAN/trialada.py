@@ -3,6 +3,7 @@ import sys
 import csv
 import pickle
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.cross_validation import KFold
@@ -64,7 +65,7 @@ def main(arg):
     # build Adaboost
     #cla = SGDClassifier(loss="hinge", penalty="l2")
     cla =RandomForestClassifier(n_estimators=50, max_features = 'log2')
-    ada = AdaBoostClassifier(base_estimator=cla,
+    ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=2),
     n_estimators=400,
     learning_rate=1,
     algorithm="SAMME",
@@ -113,10 +114,10 @@ def runTrial(cla, claName, featList, labels):
     scores = 0.0
     n_estimators = 400
     kf = KFold(1000, n_folds=10)
-    with open('outSGD_test.csv','w') as f1:
+    with open('outDtree_multi_test.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
 
-        with open('outSGD_train.csv', 'wb') as f2:
+        with open('outDtree_multi_train.csv', 'wb') as f2:
             wrtrain = csv.writer(f2, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
      
             for train, test in kf:
