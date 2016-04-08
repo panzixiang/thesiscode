@@ -77,7 +77,7 @@ def main():
     #svc = svm.SVC(kernel='linear')
     dtree = DecisionTreeClassifier(max_depth =3)
     lsvc = LinearSVC(random_state=0)
-    cla = OneVsOneClassifier(dtree, random_state=0)
+    cla = OneVsOneClassifier(dtree)
 
     cm_all = np.zeros((10,10), dtype=np.int)
 
