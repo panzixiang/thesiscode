@@ -1,53 +1,50 @@
-from gensim import corpora, models, similarities
-from itertools import chain
 from nltk.tokenize import RegexpTokenizer
 from stop_words import get_stop_words
 from nltk.stem.porter import PorterStemmer
+from gensim import corpora, models
+import gensim
 
-
-""" DEMO """
-documents = ['We give necessary and sufficient conditions for the (bounded) law of theiterated logarithm for $U$-statistics in Hilbert spaces. As a tool we alsodevelop moment and tail estimates for canonical Hilbert-space valued$U$-statistics of arbitrary order, which are of independent interest.', 'Generalization of the Kac integral and Kac method for paths measure based onthe Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.']
-
-#remove common words and tokenize
-stoplist = get_stop_words('en')
-texts = [[word for word in document.lower().split() if word not in stoplist]
-         for document in documents]
 tokenizer = RegexpTokenizer(r'\w+')
-tokens = tokenizer.tokenize(texts)
 
-# remove words that appear only once
-all_tokens = sum(texts, [])
-#tokens_once = set(word for word in set(all_tokens) if all_tokens.count(word) == 1)
-#texts = [[word for word in text if word not in tokens_once] for text in texts]
+# create English stop words list
+en_stop = get_stop_words('en')
 
-# Create Dictionary.
-id2word = corpora.Dictionary()
-# Creates the Bag of Word corpus.
-mm = [id2word.doc2bow(text) for text in texts]
+# Create p_stemmer of class PorterStemmer
+p_stemmer = PorterStemmer()
+    
+# create sample documents
+doc_a = 'We give necessary and sufficient conditions for the (bounded) law of the iterated logarithm for $U$-statistics in Hilbert spaces. As a tool we also develop moment and tail estimates for canonical Hilbert-space valued$U$-statistics of arbitrary order, which are of independent interest.'
+doc_b = 'Generalization of the Kac integral and Kac method for paths measure based on the Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.' 
 
-# Trains the LDA models.
-lda = models.ldamodel.LdaModel(corpus=mm, id2word=id2word, num_topics=3, passes=10)
+# compile sample documents into a list
+doc_set = [doc_a, doc_b]
 
-# Prints the topics.
-for top in lda.print_topics():
-  print top
-print
+# list for tokenized documents in loop
+texts = []
 
-# Assigns the topics to the documents in corpus
-lda_corpus = lda[mm]
+# loop through document list
+for i in doc_set:
+    
+    # clean and tokenize document string
+    raw = i.lower()
+    tokens = tokenizer.tokenize(raw)
 
-# Find the threshold, let's set the threshold to be 1/#clusters,
-# To prove that the threshold is sane, we average the sum of all probabilities:
-scores = list(chain(*[[score for topic_id,score in topic] \
-                      for topic in [doc for doc in lda_corpus]]))
-threshold = sum(scores)/len(scores)
-print threshold
-print
+    # remove stop words from tokens
+    stopped_tokens = [i for i in tokens if not i in en_stop]
+    
+    # stem tokens
+    stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
+    
+    # add tokens to list
+    texts.append(stemmed_tokens)
 
-cluster1 = [j for i,j in zip(lda_corpus,documents) if i[0][1] > threshold]
-cluster2 = [j for i,j in zip(lda_corpus,documents) if i[1][1] > threshold]
-cluster3 = [j for i,j in zip(lda_corpus,documents) if i[2][1] > threshold]
+# turn our tokenized documents into a id <-> term dictionary
+dictionary = corpora.Dictionary(texts)
+    
+# convert tokenized documents into a document-term matrix
+corpus = [dictionary.doc2bow(text) for text in texts]
 
-print cluster1
-print cluster2
-print cluster3
+# generate LDA model
+ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=2, id2word = dictionary, passes=20)
+
+print(ldamodel.print_topics(num_topics=2, num_words=4))
