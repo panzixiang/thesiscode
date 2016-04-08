@@ -6,35 +6,27 @@ from nltk.stem.porter import PorterStemmer
 
 
 """ DEMO """
-documents = ["Human machine interface for lab abc computer applications",
-             "A survey of user opinion of computer system response time",
-             "The EPS user interface management system",
-             "System and human system engineering testing of EPS",
-             "Relation of user perceived response time to error measurement",
-             "The generation of random binary unordered trees",
-             "The intersection graph of paths in trees",
-             "Graph minors IV Widths of trees and well quasi ordering",
-             "Graph minors A survey"]
+documents = ['We give necessary and sufficient conditions for the (bounded) law of theiterated logarithm for $U$-statistics in Hilbert spaces. As a tool we alsodevelop moment and tail estimates for canonical Hilbert-space valued$U$-statistics of arbitrary order, which are of independent interest.', 'Generalization of the Kac integral and Kac method for paths measure based onthe Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.']
 
-# remove common words and tokenize
+#remove common words and tokenize
 stoplist = get_stop_words('en')
 texts = [[word for word in document.lower().split() if word not in stoplist]
          for document in documents]
 tokenizer = RegexpTokenizer(r'\w+')
+tokens = tokenizer.tokenize(texts)
 
 # remove words that appear only once
 all_tokens = sum(texts, [])
-tokens_once = set(word for word in set(all_tokens) if all_tokens.count(word) == 1)
-texts = [[word for word in text if word not in tokens_once] for text in texts]
+#tokens_once = set(word for word in set(all_tokens) if all_tokens.count(word) == 1)
+#texts = [[word for word in text if word not in tokens_once] for text in texts]
 
 # Create Dictionary.
-id2word = corpora.Dictionary(texts)
+id2word = corpora.Dictionary()
 # Creates the Bag of Word corpus.
 mm = [id2word.doc2bow(text) for text in texts]
 
 # Trains the LDA models.
-lda = models.ldamodel.LdaModel(corpus=mm, id2word=id2word, num_topics=3, \
-                               update_every=1, chunksize=10000, passes=1)
+lda = models.ldamodel.LdaModel(corpus=mm, id2word=id2word, num_topics=3, passes=10)
 
 # Prints the topics.
 for top in lda.print_topics():

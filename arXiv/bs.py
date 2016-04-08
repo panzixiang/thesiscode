@@ -12,12 +12,14 @@ allcats = [entry.replace('<categories>', '').replace('</categories>','') for ent
 #list all abstracts
 allabs = [str(x) for x in soup.find_all('abstract')]
 #cleanup
-allabs = [entry.replace('<abstract>', '').replace('</abstract>','').replace('\n','').strip() for entry in allabs]
+allabs = [entry.replace('<abstract>', '').replace('</abstract>','').replace('\n',' ').strip() for entry in allabs]
 #print len(allabs)
 #print allabs[0]
 
 withtag = map(lambda x,y:x+': '+y, allcats, allabs)
 withtag.sort()
-for x in withtag[0:10]:
-    print x
-    print '\n'
+#for x in withtag[0:2]:
+#    print x
+#    print '\n'
+
+print allabs[1]
