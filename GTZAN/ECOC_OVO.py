@@ -73,11 +73,11 @@ def main():
 
     kf = KFold(1000, n_folds=10)
     #rf = RandomForestClassifier(n_estimators=50, max_features = 'log2')
-    #sgd = SGDClassifier(loss="hinge", penalty="l2")
+    sgd = SGDClassifier(loss="hinge", penalty="l2")
     #svc = svm.SVC(kernel='linear')
-    dtree = DecisionTreeClassifier(max_depth =3)
+    #dtree = DecisionTreeClassifier(max_depth =3)
     lsvc = LinearSVC(random_state=0)
-    cla = OneVsOneClassifier(dtree)
+    cla = OneVsOneClassifier(sgd)
 
     cm_all = np.zeros((10,10), dtype=np.int)
 
@@ -96,11 +96,6 @@ def main():
             scores += loss
             # print y_test
             # print predictions
-                        
-            cb = cla.code_book_
-
-            np.savetxt('codebook.csv', cb, delimiter=',')
-
             # Compute confusion matrix
             cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
             np.set_printoptions(precision=2)
