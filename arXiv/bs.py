@@ -39,8 +39,8 @@ math = []
 nlin = []
 nucl = []
 physics = []
-q-bio = []
-q-fin = []
+qbio = []
+qfin = []
 quant = []
 stat = []
 for i in range(len(pri_target)):
@@ -61,9 +61,9 @@ for i in range(len(pri_target)):
     elif 'physics' in pri_target[i]:
         physics.append(allabs[i])
     elif 'q-bio' in pri_target[i]:
-        q-bio.append(allabs[i])
+        qbio.append(allabs[i])
     elif 'q-fin' in pri_target[i]:
-        q-fin.append(allabs[i])
+        qfin.append(allabs[i])
     elif 'quant' in pri_target[i]:
         quant.append(allabs[i])
     elif 'stat' in pri_target[i]:
