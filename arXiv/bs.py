@@ -59,6 +59,7 @@ for i in range(len(pri_tagset)):
     elif 'nucl' in pri_tagset[i]:
         nucl.append(allabs[i])
     elif 'physics' in pri_tagset[i]:
+        print 'physics +1'
         physics.append(allabs[i])
     elif 'q-bio' in pri_tagset[i]:
         qbio.append(allabs[i])
