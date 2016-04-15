@@ -38,6 +38,7 @@ qfin = []
 quant = []
 stat = []
 for i in range(len(pri_tagset)):
+    print pri_tagset[i]
     if 'astro' in pri_tagset[i]:
         astro.append(allabs[i])
     elif 'cond' in pri_tagset[i]:
@@ -64,7 +65,7 @@ for i in range(len(pri_tagset)):
         stat.append(allabs[i])
     else:
         pass  
-
+'''
 print len(astro)
 print len(cond)
 print len(cs)
@@ -74,3 +75,4 @@ print len(qbio)
 print len(qfin)
 print len(quant)
 print len(stat)
+'''
