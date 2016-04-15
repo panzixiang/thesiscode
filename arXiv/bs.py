@@ -42,31 +42,32 @@ for i in range(len(pri_tagset)):
     #print pri_tagset[i]
     if 'astro' in pri_tagset[i]:
         astro.append(allabs[i])
-    if 'cond' in pri_tagset[i]:
+    elif 'cond' in pri_tagset[i]:
         cond.append(allabs[i])
-    if 'cs' in pri_tagset[i]:
+    elif 'cs' in pri_tagset[i]:
         cs.append(allabs[i])
-    if 'hep' in pri_tagset[i]:
+    elif 'hep' in pri_tagset[i]:
         hep.append(allabs[i])
-    if 'gr-qc' in pri_tagset[i]:
+    elif 'gr-qc' in pri_tagset[i]:
         physics.append(allabs[i])
-    if 'math' in pri_tagset[i]:
+    elif 'math' in pri_tagset[i]:
         math.append(allabs[i])
-    if 'nlin' in pri_tagset[i]:
+    elif 'nlin' in pri_tagset[i]:
         physics.append(allabs[i])
-    if 'nucl' in pri_tagset[i]:
+    elif 'nucl' in pri_tagset[i]:
         physics.append(allabs[i])
-    if 'physics' in pri_tagset[i]:
+    elif 'physics' in pri_tagset[i]:
         physics.append(allabs[i])
-    if 'q-bio' in pri_tagset[i]:
+    elif 'q-bio' in pri_tagset[i]:
         qbio.append(allabs[i])
-    if 'q-fin' in pri_tagset[i]:
+    elif 'q-fin' in pri_tagset[i]:
         qfin.append(allabs[i])
-    if 'quant' in pri_tagset[i]:
+    elif 'quant' in pri_tagset[i]:
         quant.append(allabs[i])
-    if 'stat' in pri_tagset[i]:
+    elif 'stat' in pri_tagset[i]:
         stat.append(allabs[i])  
-
+    else:
+        print pri_tagset[i]
 print len(astro)
 print len(cond)
 print len(cs)
