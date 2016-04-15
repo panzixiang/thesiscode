@@ -25,19 +25,13 @@ withtag.sort()
 #    print x
 #    print '\n'
 
-print allabs[1]
-
-
 #['astro-ph', 'cond-mat', 'cs', 'gr-qc', 'hep-ex', 'hep-lat', 'hep-ph', 'hep-th', 'math', 'math-ph', 'nlin', 'nucl-ex', 'nucl-th', 'physics', 'q-bio', 'q-fin', 'quant-ph', 'stat']
 
 #build individual lists
 astro = []
 cond = []
 cs = []
-hep = []
 math = []
-nlin = []
-nucl = []
 physics = []
 qbio = []
 qfin = []
@@ -51,15 +45,14 @@ for i in range(len(pri_tagset)):
     elif 'cs' in pri_tagset[i]:
         cs.append(allabs[i])
     elif 'hep' in pri_tagset[i]:
-        hep.append(allabs[i])
+        physics.append(allabs[i])
     elif 'math' in pri_tagset[i]:
         math.append(allabs[i])
     elif 'nlin' in pri_tagset[i]:
-        nlin.append(allabs[i])
+        physics.append(allabs[i])
     elif 'nucl' in pri_tagset[i]:
-        nucl.append(allabs[i])
+        physics.append(allabs[i])
     elif 'physics' in pri_tagset[i]:
-        print 'physics +1'
         physics.append(allabs[i])
     elif 'q-bio' in pri_tagset[i]:
         qbio.append(allabs[i])
@@ -75,10 +68,7 @@ for i in range(len(pri_tagset)):
 print len(astro)
 print len(cond)
 print len(cs)
-print len(hep)
 print len(math)
-print len(nlin)
-print len(nucl)
 print len(physics)
 print len(qbio)
 print len(qfin)
