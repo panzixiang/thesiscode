@@ -31,6 +31,7 @@ withtag.sort()
 astro = []
 cond = []
 cs = []
+hep = []
 math = []
 physics = []
 qbio = []
@@ -38,41 +39,41 @@ qfin = []
 quant = []
 stat = []
 for i in range(len(pri_tagset)):
-    print pri_tagset[i]
+    #print pri_tagset[i]
     if 'astro' in pri_tagset[i]:
         astro.append(allabs[i])
-    elif 'cond' in pri_tagset[i]:
+    if 'cond' in pri_tagset[i]:
         cond.append(allabs[i])
-    elif 'cs' in pri_tagset[i]:
+    if 'cs' in pri_tagset[i]:
         cs.append(allabs[i])
-    elif 'hep' in pri_tagset[i]:
+    if 'hep' in pri_tagset[i]:
+        hep.append(allabs[i])
+    if 'gr-qc' in pri_tagset[i]:
         physics.append(allabs[i])
-    elif 'math' in pri_tagset[i]:
+    if 'math' in pri_tagset[i]:
         math.append(allabs[i])
-    elif 'nlin' in pri_tagset[i]:
+    if 'nlin' in pri_tagset[i]:
         physics.append(allabs[i])
-    elif 'nucl' in pri_tagset[i]:
+    if 'nucl' in pri_tagset[i]:
         physics.append(allabs[i])
-    elif 'physics' in pri_tagset[i]:
+    if 'physics' in pri_tagset[i]:
         physics.append(allabs[i])
-    elif 'q-bio' in pri_tagset[i]:
+    if 'q-bio' in pri_tagset[i]:
         qbio.append(allabs[i])
-    elif 'q-fin' in pri_tagset[i]:
+    if 'q-fin' in pri_tagset[i]:
         qfin.append(allabs[i])
-    elif 'quant' in pri_tagset[i]:
+    if 'quant' in pri_tagset[i]:
         quant.append(allabs[i])
-    elif 'stat' in pri_tagset[i]:
-        stat.append(allabs[i])
-    else:
-        pass  
-'''
+    if 'stat' in pri_tagset[i]:
+        stat.append(allabs[i])  
+
 print len(astro)
 print len(cond)
 print len(cs)
+print len(hep)
 print len(math)
 print len(physics)
 print len(qbio)
 print len(qfin)
 print len(quant)
 print len(stat)
-'''
