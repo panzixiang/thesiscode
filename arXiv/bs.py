@@ -9,9 +9,10 @@ allcats = [str(x) for x in soup.find_all('categories')]
 allcats = [entry.replace('<categories>', '').replace('</categories>','') for entry in allcats]
 #split individual tags and get the first as the catgory
 allcatsplit = [taglist.split() for taglist in allcats]
-pri_tagset = [cat[0].split('.', 1)[0]  for cat in allcatsplit]
+pri_tagset = [cat[0]  for cat in allcatsplit]
 #see uniques
 uniq_tagset = sorted(set(pri_tagset))
+print uniq_tagset
 
 #list all abstracts
 allabs = [str(x) for x in soup.find_all('abstract')]
@@ -26,7 +27,7 @@ withtag.sort()
 #    print '\n'
 
 #['astro-ph', 'cond-mat', 'cs', 'gr-qc', 'hep-ex', 'hep-lat', 'hep-ph', 'hep-th', 'math', 'math-ph', 'nlin', 'nucl-ex', 'nucl-th', 'physics', 'q-bio', 'q-fin', 'quant-ph', 'stat']
-
+'''
 #build individual lists
 astro = []
 cond = []
@@ -78,3 +79,4 @@ print len(qbio)
 print len(qfin)
 print len(quant)
 print len(stat)
+'''
