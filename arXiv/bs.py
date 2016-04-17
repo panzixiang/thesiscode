@@ -16,7 +16,7 @@ allcatsplit = [taglist.split() for taglist in allcats]
 pri_tagset = [cat[0]  for cat in allcatsplit]
 #see uniques
 uniq_tagset = sorted(set(pri_tagset))
-print uniq_tagset
+#print uniq_tagset
 
 #list all abstracts
 allabs = [str(x) for x in soup.find_all('abstract')]
