@@ -1,6 +1,10 @@
 from bs4 import BeautifulSoup
+import csv
+import sys
+import os
+import pickle
 
-soup = BeautifulSoup(open("datasets/all.xml"), "html5lib")
+soup = BeautifulSoup(open("2011_arxiv.xml"), "html5lib")
 #printb"(soup.prettify())
 
 #find all sub-categories
@@ -27,7 +31,7 @@ withtag.sort()
 #    print '\n'
 
 #['astro-ph', 'cond-mat', 'cs', 'gr-qc', 'hep-ex', 'hep-lat', 'hep-ph', 'hep-th', 'math', 'math-ph', 'nlin', 'nucl-ex', 'nucl-th', 'physics', 'q-bio', 'q-fin', 'quant-ph', 'stat']
-'''
+
 #build individual lists
 astro = []
 cond = []
@@ -39,6 +43,7 @@ qbio = []
 qfin = []
 quant = []
 stat = []
+others = []
 for i in range(len(pri_tagset)):
     #print pri_tagset[i]
     if 'astro' in pri_tagset[i]:
@@ -49,16 +54,10 @@ for i in range(len(pri_tagset)):
         cs.append(allabs[i])
     elif 'hep' in pri_tagset[i]:
         hep.append(allabs[i])
-    elif 'gr-qc' in pri_tagset[i]:
+    elif any(ext in pri_tagset[i] for ext in ['chao','gr-qc','nlin','nucl','physics']):
         physics.append(allabs[i])
     elif 'math' in pri_tagset[i]:
         math.append(allabs[i])
-    elif 'nlin' in pri_tagset[i]:
-        physics.append(allabs[i])
-    elif 'nucl' in pri_tagset[i]:
-        physics.append(allabs[i])
-    elif 'physics' in pri_tagset[i]:
-        physics.append(allabs[i])
     elif 'q-bio' in pri_tagset[i]:
         qbio.append(allabs[i])
     elif 'q-fin' in pri_tagset[i]:
@@ -68,15 +67,23 @@ for i in range(len(pri_tagset)):
     elif 'stat' in pri_tagset[i]:
         stat.append(allabs[i])  
     else:
-        print pri_tagset[i]
-print len(astro)
-print len(cond)
-print len(cs)
-print len(hep)
-print len(math)
-print len(physics)
-print len(qbio)
-print len(qfin)
-print len(quant)
-print len(stat)
-'''
+        others.append(allabs[i])
+
+bigcatDict = {}
+bigcatDict['astro'] = astro
+bigcatDict['cond'] = cond
+bigcatDict['cs'] = cs
+bigcatDict['hep'] = hep
+bigcatDict['math'] = math
+bigcatDict['physics'] = physics
+bigcatDict['qbio'] = qbio
+bigcatDict['qfin'] = qfin
+bigcatDict['quant'] = quant
+bigcatDict['stat'] = stat
+bigcatDict['others'] = others
+
+for key in bigcatDict.iterkeys():
+    print key+" "+len(bigcatDict[key])
+
+pickle.dump(bigcatDict, open("2011_big_pop.p", "wb"))       
+
