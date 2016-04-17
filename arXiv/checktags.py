@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-soup = BeautifulSoup(open("datasets/all.xml"), "html5lib")
+soup = BeautifulSoup(open("2012_arxiv.xml"), "html5lib")
 #printb"(soup.prettify())
 
 #find all sub-categories

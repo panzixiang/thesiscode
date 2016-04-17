@@ -1,0 +1,12 @@
+tat 576
+hep 8274
+qbio 473
+qfin 239
+astro 6083
+cond 5938
+others 18
+cs 7420
+quant 1926
+physics 3303
+math 12336
+
