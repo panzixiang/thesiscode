@@ -84,7 +84,7 @@ bigcatDict['stat'] = stat
 bigcatDict['others'] = others
 
 for key in bigcatDict.iterkeys():
-    print key+" "+len(bigcatDict[key])
+    print key+" "+str(len(bigcatDict[key]))
 
 pickle.dump(bigcatDict, open("2011_big_pop.p", "wb"))       
 
