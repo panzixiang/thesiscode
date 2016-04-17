@@ -3,17 +3,18 @@
 *.csv
 *.fig
 
+#ignore arXiv xml
+arXiv/*.xml
+
+#ignore pickles
+arXiv/*.p
+
 #ignore test outputs
 GTZAN/out.txt
 
 #ignore latex file
-report/cos424_template.aux
-report/cos424_template.pdf
-report/cos414_template.bbl
-report/cos414_template.blg
 
 #data folder
-data
 
 # Windows image file caches
 Thumbs.db
