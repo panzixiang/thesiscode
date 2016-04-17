@@ -4,7 +4,7 @@ import sys
 import os
 import pickle
 
-soup = BeautifulSoup(open("2011_arxiv.xml"), "html5lib")
+soup = BeautifulSoup(open("2012_arxiv.xml"), "html5lib")
 #print(soup.prettify())
 
 #find all sub-categories
@@ -16,7 +16,7 @@ allcatsplit = [taglist.split() for taglist in allcats]
 pri_tagset = [cat[0]  for cat in allcatsplit]
 #see uniques
 uniq_tagset = sorted(set(pri_tagset))
-print uniq_tagset
+#print uniq_tagset
 
 #list all abstracts
 allabs = [str(x) for x in soup.find_all('abstract')]
@@ -86,5 +86,5 @@ bigcatDict['others'] = others
 for key in bigcatDict.iterkeys():
     print key+" "+str(len(bigcatDict[key]))
 
-pickle.dump(bigcatDict, open("2011_big_pop.p", "wb"))       
+pickle.dump(bigcatDict, open("2012_big_pop.p", "wb"))       
 
