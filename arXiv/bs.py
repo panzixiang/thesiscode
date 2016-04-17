@@ -5,7 +5,7 @@ import os
 import pickle
 
 soup = BeautifulSoup(open("2011_arxiv.xml"), "html5lib")
-#printb"(soup.prettify())
+#print(soup.prettify())
 
 #find all sub-categories
 allcats = [str(x) for x in soup.find_all('categories')]
@@ -69,6 +69,7 @@ for i in range(len(pri_tagset)):
     else:
         others.append(allabs[i])
 
+#dict for pickle dump
 bigcatDict = {}
 bigcatDict['astro'] = astro
 bigcatDict['cond'] = cond
