@@ -29,6 +29,9 @@ doc_set = arxiv_11['math']
 # list for tokenized documents in loop
 texts = []
 
+# collate each document as stemmed tokens
+doc_tokens = []
+
 # loop through document list
 for i in doc_set:
     
@@ -57,6 +60,6 @@ ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=30, id2word = dict
 # print(ldamodel.print_topics(num_topics=2, num_words=3))
 
 # look at topic proportion of one document
-print ldamodel[dictionary.doc2bow(arxiv_12['math'][0])]
+print ldamodel[dictionary.doc2bow(texts[0])]
 
 # build topic proportion matrix
