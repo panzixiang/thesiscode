@@ -3,8 +3,15 @@ from stop_words import get_stop_words
 from nltk.stem.porter import PorterStemmer
 from gensim import corpora, models
 import gensim
+import pickle
+import csv
+import sys
 
 tokenizer = RegexpTokenizer(r'\w+')
+
+# load pickle
+2011_arxiv = pickle.load( open( "2011_big_pop.p", "rb" ) )
+2012_arxiv = pickle.load( open( "2011_big_pop.p", "rb" ) )
 
 # create English stop words list
 en_stop = get_stop_words('en')
@@ -13,11 +20,11 @@ en_stop = get_stop_words('en')
 p_stemmer = PorterStemmer()
     
 # create sample documents
-doc_a = 'We give necessary and sufficient conditions for the (bounded) law of the iterated logarithm for $U$-statistics in Hilbert spaces. As a tool we also develop moment and tail estimates for canonical Hilbert-space valued$U$-statistics of arbitrary order, which are of independent interest.'
-doc_b = 'Generalization of the Kac integral and Kac method for paths measure based on the Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.' 
+# doc_a = 'We give necessary and sufficient conditions for the (bounded) law of the iterated logarithm for $U$-statistics in Hilbert spaces. As a tool we also develop moment and tail estimates for canonical Hilbert-space valued$U$-statistics of arbitrary order, which are of independent interest.'
+# doc_b = 'Generalization of the Kac integral and Kac method for paths measure based on the Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.' 
 
-# compile sample documents into a list
-doc_set = [doc_a, doc_b]
+# build doc set
+doc_set = 2011_arxiv['math']
 
 # list for tokenized documents in loop
 texts = []
@@ -45,6 +52,11 @@ dictionary = corpora.Dictionary(texts)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 # generate LDA model
-ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=2, id2word = dictionary, passes=20)
+ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=30, id2word = dictionary, passes=20)
 
-print(ldamodel.print_topics(num_topics=2, num_words=3))
+# print(ldamodel.print_topics(num_topics=2, num_words=3))
+
+# look at topic proportiongof one document
+print ldamodel[dictionary.doc2bow(2012_arxiv['math'][0])]
+
+# build topic proportion matrix
