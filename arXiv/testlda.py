@@ -10,8 +10,8 @@ import sys
 tokenizer = RegexpTokenizer(r'\w+')
 
 # load pickle
-2011_arxiv = pickle.load( open( "2011_big_pop.p", "rb" ) )
-2012_arxiv = pickle.load( open( "2011_big_pop.p", "rb" ) )
+arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
+arxiv_12 = pickle.load(open("2011_big_pop.p", "rb"))
 
 # create English stop words list
 en_stop = get_stop_words('en')
@@ -24,7 +24,7 @@ p_stemmer = PorterStemmer()
 # doc_b = 'Generalization of the Kac integral and Kac method for paths measure based on the Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.' 
 
 # build doc set
-doc_set = 2011_arxiv['math']
+doc_set = arxiv_11['math']
 
 # list for tokenized documents in loop
 texts = []
@@ -56,7 +56,7 @@ ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=30, id2word = dict
 
 # print(ldamodel.print_topics(num_topics=2, num_words=3))
 
-# look at topic proportiongof one document
-print ldamodel[dictionary.doc2bow(2012_arxiv['math'][0])]
+# look at topic proportion of one document
+print ldamodel[dictionary.doc2bow(arxiv_12['math'][0])]
 
 # build topic proportion matrix
