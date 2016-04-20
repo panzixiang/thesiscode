@@ -3,6 +3,7 @@ from stop_words import get_stop_words
 from nltk.stem.porter import PorterStemmer
 from gensim import corpora, models
 from sklearn import svm
+from sklearn.metrics import zero_one_loss
 import gensim
 import pickle
 import csv
