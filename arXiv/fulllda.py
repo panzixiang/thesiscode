@@ -15,6 +15,8 @@ tokenizer = RegexpTokenizer(r'\w+')
 arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
 arxiv_12 = pickle.load(open("2011_big_pop.p", "rb"))
 
+print "loaded pickles"
+
 # create English stop words list
 en_stop = get_stop_words('en')
 
@@ -30,7 +32,7 @@ doc_set = arxiv_11['math']
 
 # list for tokenized documents in loop
 texts = []
-
+'''
 # loop through document list
 for i in doc_set:
     
@@ -57,6 +59,8 @@ corpus = [dictionary.doc2bow(text) for text in texts]
 num_topics = 30
 ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=20)
 
+print "LDA built"
+
 # print(ldamodel.print_topics(num_topics=2, num_words=3))
 
 # look at topic proportion of one document
@@ -71,6 +75,10 @@ for i in range(len(texts)):
         topicIdx = pair[0]
         weight = pair[1]
         topicPropArray[i, topicIdx] = weight
+'''
+print "matrix built"
+print "------------------"
+print "testing"
 
 # test on new data
 test_set = arxiv_12['math'][0:9]
