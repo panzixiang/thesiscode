@@ -76,7 +76,7 @@ for i in range(len(texts)):
         weight = pair[1]
         topicPropArray[i, topicIdx] = weight
 
-print topicPropArray
+# print topicPropArray
 
 print "matrix built"
 print "------------------"
@@ -109,11 +109,12 @@ for test in test_texts:
     sim_score = np.zeros(len(texts))
     test_vec = np.zeros(num_topics)
     newProp = ldamodel[dictionary.doc2bow(test)]
-    print newProp
     for pair in newProp:
         topicIdx = pair[0]
         weight = pair[1]
         test_vec[topicIdx] = weight
+    print test_vec
+    print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
     simscore = [scipy.spatial.distance.cosine(test_vec, row) for row in topicPropArray]
     max_score = np.amax(sim_score)
     print max_score
