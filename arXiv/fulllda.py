@@ -53,7 +53,7 @@ dictionary = corpora.Dictionary(texts)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 # generate LDA model
-num_topics = 30
+num_topics = 15
 ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=20)
 
 print "LDA built"
@@ -112,4 +112,6 @@ for test in test_texts:
     sim_score = [(1-scipy.spatial.distance.cosine(test_vec, row)) for row in topicPropArray]
     max_score = np.amax(sim_score)
     print max_score
+    mean_score = np.mean(sim_score)
+    print mean_score
     confidence.append(max_score)
