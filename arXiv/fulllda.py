@@ -119,6 +119,7 @@ cla = svm.SVC(kernel='linear')
 X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label
 cla.fit(X_train, y_train)
 predictions = cla.predict(X_test)
+print predictions
 print zero_one_loss(predictions, y_test)
 '''           
     sim_score = [(1-scipy.spatial.distance.cosine(test_vec, row)) for row in topicPropArray]
