@@ -112,9 +112,12 @@ for test in test_texts:
         test_vec[topicIdx] = weight    
     for i in range(len(topicPropArray)):
         sim = scipy.spatial.distance.cosine(test_vec, topicPropArray[i])
-        if sim > 0.999
+        if sim > 0.999:
+            print '-------------------'
+            print i
             print test_vec
             print topicPropArray[i]
+            print '-------------------'
         sim_score.append(sim)    
     # print test_vec
     # print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
