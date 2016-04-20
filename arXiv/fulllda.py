@@ -13,7 +13,7 @@ tokenizer = RegexpTokenizer(r'\w+')
 
 # load pickle
 arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
-arxiv_12 = pickle.load(open("2011_big_pop.p", "rb"))
+arxiv_12 = pickle.load(open("2012_big_pop.p", "rb"))
 
 print "loaded pickles"
 
@@ -83,7 +83,7 @@ print "testing"
 
 # test on new data
 test_set = arxiv_12['math']
-print test_set[0]
+test_set = test_set[0:9]
 
 # loop through test list
 for i in test_set:
