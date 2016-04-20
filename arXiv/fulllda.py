@@ -80,8 +80,7 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['qbio']
-test_set = test_set[0:9]
+test_set = arxiv_12['qbio'][0:9] + arxiv_12['math'][0:9] 
 
 test_texts = []
 
@@ -112,5 +111,5 @@ for test in test_texts:
         test_vec[topicIdx] = weight    
     sim_score = [(1-scipy.spatial.distance.cosine(test_vec, row)) for row in topicPropArray]
     max_score = np.amax(sim_score)
-    #print max_score
+    print max_score
     confidence.append(max_score)
