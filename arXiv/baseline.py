@@ -38,16 +38,16 @@ bigcatDict['qfin'] = qfin
 bigcatDict['quant'] = quant
 bigcatDict['stat'] = stat    
 # build doc set
-doc_set = arxiv_11['astro'] + arxiv_11['cond'] + 
-          arxiv_11['cs'] + arxiv_11['hep'] + 
-          arxiv_11['math'] + arxiv_11['physics'] + 
-          arxiv_11['qbio'] + arxiv_11['qfin'] + 
+doc_set = arxiv_11['astro'] + arxiv_11['cond'] + \
+          arxiv_11['cs'] + arxiv_11['hep'] + \
+          arxiv_11['math'] + arxiv_11['physics'] + \
+          arxiv_11['qbio'] + arxiv_11['qfin'] + \
           arxiv_11['quant'] + arxiv_11['stat'] 
-label_set = [1]*len(arxiv_11['astro']) + [2]*len(arxiv_11['cond']) +
-            [3]*len(arxiv_11['cs']) + [4]*len(arxiv_11['hep']) +
-            [5]*len(arxiv_11['math']) + [6]*len(arxiv_11['physics']) +
-            [7]*len(arxiv_11['qbio']) + [9]*len(arxiv_11['qfin']) +
-            [10]*len(arxiv_11['quant']) + [2]*len(arxiv_11['stat']) + 
+label_set = [1]*len(arxiv_11['astro']) + [2]*len(arxiv_11['cond']) + \
+            [3]*len(arxiv_11['cs']) + [4]*len(arxiv_11['hep']) + \
+            [5]*len(arxiv_11['math']) + [6]*len(arxiv_11['physics']) + \
+            [7]*len(arxiv_11['qbio']) + [9]*len(arxiv_11['qfin']) + \
+            [10]*len(arxiv_11['quant']) + [2]*len(arxiv_11['stat']) 
 
 # list for tokenized documents in loop
 texts = []
@@ -102,12 +102,12 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['astro'][0:9] + arxiv_12['cond'][0:9] + 
-          arxiv_12['cs'][0:9] + arxiv_12['hep'][0:9] + 
-          arxiv_12['math'][0:9] + arxiv_12['physics'][0:9] + 
-          arxiv_12['qbio'][0:9] + arxiv_12['qfin'][0:9] + 
+test_set = arxiv_12['astro'][0:9] + arxiv_12['cond'][0:9] + \
+          arxiv_12['cs'][0:9] + arxiv_12['hep'][0:9] + \
+          arxiv_12['math'][0:9] + arxiv_12['physics'][0:9] + \
+          arxiv_12['qbio'][0:9] + arxiv_12['qfin'][0:9] + \
           arxiv_12['quant'][0:9] + arxiv_12['stat'][0:9] 
-test_label = [1]*10 + [2]*10 + [3]*10 + [4]*10 + [5]*10 +   
+test_label = [1]*10 + [2]*10 + [3]*10 + [4]*10 + [5]*10 + \
              [6]*10 + [7]*10 + [8]*10 + [9]*10 + [10]*10  
 
 test_texts = []
