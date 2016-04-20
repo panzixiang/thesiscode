@@ -110,19 +110,7 @@ for test in test_texts:
         topicIdx = pair[0]
         weight = pair[1]
         test_vec[topicIdx] = weight    
-    for i in range(len(topicPropArray)):
-        sim = scipy.spatial.distance.cosine(test_vec, topicPropArray[i])
-        if sim > 0.999:
-            print '-------------------'
-            print i
-            print test_vec
-            print topicPropArray[i]
-            print '-------------------'
-        sim_score.append(sim)    
-    # print test_vec
-    # print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
-    # sim_score = [scipy.spatial.distance.cosine(test_vec, topicPropArray[i]) for i in range(len(topicPropArray))]
-    print sim_score
-    #max_score = sim_score.max()
+    sim_score = [(1-scipy.spatial.distance.cosine(test_vec, row)) for row in topicPropArray]
+    max_score = sim_score.max()
     #print max_score
-    #confidence.append(max_score)
+    confidence.append(max_score)
