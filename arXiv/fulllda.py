@@ -60,7 +60,7 @@ ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2wor
 # print(ldamodel.print_topics(num_topics=2, num_words=3))
 
 # look at topic proportion of one document
-print ldamodel[dictionary.doc2bow(texts[0])]
+# print ldamodel[dictionary.doc2bow(texts[0])]
 
 # build topic proportion matrix
 topicPropArray = np.zeros((len(texts), num_topics))
@@ -77,7 +77,7 @@ test_set = arxiv_12['math'][0:9]
 
 # loop through test list
 for i in test_set:
-    
+    print i
     # clean and tokenize document string
     raw = i.lower()
     tokens = tokenizer.tokenize(raw)
