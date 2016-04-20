@@ -84,10 +84,12 @@ print "testing"
 test_set = arxiv_12['math']
 test_set = test_set[0:9]
 
+test_texts = []
+
 # loop through test list
 for i in test_set:
     # clean and tokenize document string
-    raw = ' '.join(i).lower()
+    raw = i.lower()
     tokens = tokenizer.tokenize(raw)
 
     # remove stop words from tokens
@@ -97,7 +99,7 @@ for i in test_set:
     stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
     
     # add tokens to list
-    test_set.append(stemmed_tokens)
+    test_texts.append(stemmed_tokens)
 
 # calculate similarity measure
 confidence = []
