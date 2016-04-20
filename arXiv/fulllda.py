@@ -80,7 +80,7 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['qbio'][0:9] + arxiv_12['math'][0:9] 
+test_set = arxiv_12['astro'][0:9] + arxiv_12['math'][0:9] 
 
 test_texts = []
 
@@ -114,4 +114,5 @@ for test in test_texts:
     print max_score
     mean_score = np.mean(sim_score)
     print mean_score
+    print '\n'
     confidence.append(max_score)
