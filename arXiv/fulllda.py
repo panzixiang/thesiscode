@@ -8,6 +8,7 @@ import csv
 import sys
 import numpy as np
 import scipy
+from scipy import spatial.distance as dist
 
 tokenizer = RegexpTokenizer(r'\w+')
 
@@ -116,7 +117,7 @@ for test in test_texts:
 
     # print test_vec
     # print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
-    sim_score = [scipy.spatial.distance.cosine(test_vec, row) for row in topicPropArray]
+    sim_score = [dist.cosine(test_vec, topicPropArray[i]) for i in range(len(topicPropArray))]
     print sim_score
     #max_score = sim_score.max()
     #print max_score
