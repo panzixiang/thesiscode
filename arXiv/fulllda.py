@@ -12,8 +12,8 @@ import scipy as sp
 tokenizer = RegexpTokenizer(r'\w+')
 
 # load pickle
-arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
-arxiv_12 = pickle.load(open("2012_big_pop.p", "rb"))
+arxiv_11 = pickle.load(open("2012_big_pop.p", "rb"))
+arxiv_12 = pickle.load(open("2011_big_pop.p", "rb"))
 
 print "loaded pickles"
 
