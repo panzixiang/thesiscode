@@ -83,7 +83,7 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['q-bio']
+test_set = arxiv_12['qbio']
 test_set = test_set[0:9]
 
 test_texts = []
