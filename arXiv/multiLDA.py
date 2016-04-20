@@ -10,14 +10,7 @@ import numpy as np
 import scipy
 import random
 
-tokenizer = RegexpTokenizer(r'\w+')
 
-# load pickle
-arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
-arxiv_12 = pickle.load(open("2012_big_pop.p", "rb"))
-topiclists = pickle.load(open("minor_subjects.p", "rb"))
-
-print "loaded pickles"
 
 def buildMixtureLDA(str_of_subj):
 
@@ -32,7 +25,9 @@ def buildMixtureLDA(str_of_subj):
     # doc_b = 'Generalization of the Kac integral and Kac method for paths measure based on the Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.' 
 
     # build doc set
-    doc_set = arxiv_11[subj]
+    doc_set = []
+    for subj in str_of_subj:
+        doc_set = doc_set + arxiv_11[subj]
 
     # list for tokenized documents in loop
     texts = []
@@ -140,7 +135,21 @@ def runTest(test_texts, topicPropArray):
         
 
 def main():
-    # my code here
+
+    tokenizer = RegexpTokenizer(r'\w+')
+
+    # load pickle
+    arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
+    arxiv_12 = pickle.load(open("2012_big_pop.p", "rb"))
+    topiclists = pickle.load(open("minor_subjects.p", "rb"))
+
+    print "loaded pickles"
+    
+    # OVA LDA classifier
+    matharray = 
+
+
+
 
 if __name__ == "__main__":
     main()    

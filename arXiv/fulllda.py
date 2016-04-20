@@ -117,6 +117,6 @@ for test in test_texts:
     # print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
     sim_score = [scipy.spatial.distance.cosine(test_vec, row) for row in topicPropArray]
     print sim_score
-    max_score = sim_score.max()
-    print max_score
-    confidence.append(max_score)
+    #max_score = sim_score.max()
+    #print max_score
+    #confidence.append(max_score)
