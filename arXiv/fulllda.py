@@ -106,13 +106,14 @@ for i in test_set:
 # calculate similarity measure
 confidence = []
 for test in test_texts:
-    sim_score = np.zeros(len(texts))
+    sim_score = []
     test_vec = np.zeros(num_topics)
     newProp = ldamodel[dictionary.doc2bow(test)]
     for pair in newProp:
         topicIdx = pair[0]
         weight = pair[1]
-        test_vec[topicIdx] = weight
+        test_vec[topicIdx] = weight    
+
     # print test_vec
     # print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
     sim_score = [scipy.spatial.distance.cosine(test_vec, row) for row in topicPropArray]
