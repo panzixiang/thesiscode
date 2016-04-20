@@ -105,7 +105,7 @@ for i in test_set:
 confidence = []
 for test in test_set:
     sim_score = np.zeros(len(texts))
-    test_vec = np.zeros(1, num_topics)
+    test_vec = np.zeros(num_topics)
     newProp = ldamodel[dictionary.doc2bow(test)]
     for pair in newProp:
         topicIdx = pair[0]
