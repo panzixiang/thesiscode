@@ -29,6 +29,7 @@ p_stemmer = PorterStemmer()
 
 # build doc set
 doc_set = arxiv_11['math']
+print doc_set[0]
 
 # list for tokenized documents in loop
 texts = []
@@ -81,7 +82,8 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['math'][0:1]
+test_set = arxiv_12['math']
+print test_set[0]
 
 # loop through test list
 for i in test_set:
