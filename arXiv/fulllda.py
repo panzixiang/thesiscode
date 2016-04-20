@@ -103,7 +103,7 @@ for i in test_set:
 
 # calculate similarity measure
 confidence = []
-for test in test_set:
+for test in test_texts:
     sim_score = np.zeros(len(texts))
     test_vec = np.zeros(num_topics)
     newProp = ldamodel[dictionary.doc2bow(test)]
