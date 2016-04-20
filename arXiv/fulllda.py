@@ -81,7 +81,7 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['math'][0:9]
+test_set = arxiv_12['math'][0:1]
 
 # loop through test list
 for i in test_set:
