@@ -2,6 +2,7 @@ from nltk.tokenize import RegexpTokenizer
 from stop_words import get_stop_words
 from nltk.stem.porter import PorterStemmer
 from gensim import corpora, models
+from sklearn import svm
 import gensim
 import pickle
 import csv
@@ -25,7 +26,8 @@ en_stop = get_stop_words('en')
 p_stemmer = PorterStemmer()
     
 # build doc set
-doc_set = arxiv_11['math']
+doc_set = arxiv_11['math'] + arxiv_11['astro']
+label_set = [1]*len(arxiv_11['math']) + [2]*len(arxiv_11['astro'])
 
 # list for tokenized documents in loop
 texts = []
@@ -53,7 +55,7 @@ dictionary = corpora.Dictionary(texts)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 # generate LDA model
-num_topics = 130
+num_topics = 170
 ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=20)
 
 print "LDA built"
@@ -80,7 +82,8 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['astro'][0:9] + arxiv_12['math'][0:9] 
+test_set = arxiv_12['astro'][0:9] + arxiv_12['math'][0:9]
+test_label = [2]*10 + [1]*10 
 
 test_texts = []
 
@@ -101,15 +104,22 @@ for i in test_set:
 
 # calculate similarity measure
 confidence = []
-for test in test_texts:
-    print test
-    sim_score = np.zeros(num_topics) 
-    test_vec = np.zeros(num_topics)
-    newProp = ldamodel[dictionary.doc2bow(test)]
-    for pair in newProp:
+testPropArray = np.zeros((20, num_topics))
+for i in range(len(test_texts)):
+    test = test_texts[i]
+    testProp = ldamodel[dictionary.doc2bow(test)]
+    for pair in testProp:
         topicIdx = pair[0]
         weight = pair[1]
-        test_vec[topicIdx] = weight    
+        testPropArray[i, topicIdx] = weight
+
+
+cla = svm.SVC(kernel='linear')
+X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label
+cla.fit(X_train, y_train)
+predictions = cla.predict(X_test)
+print zero_one_loss(predictions, y_test)
+'''           
     sim_score = [(1-scipy.spatial.distance.cosine(test_vec, row)) for row in topicPropArray]
     max_score = np.amax(sim_score)
     print max_score
@@ -117,3 +127,4 @@ for test in test_texts:
     print mean_score
     print '\n'
     confidence.append(max_score)
+'''
