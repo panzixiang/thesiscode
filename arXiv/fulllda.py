@@ -24,10 +24,6 @@ en_stop = get_stop_words('en')
 # Create p_stemmer of class PorterStemmer
 p_stemmer = PorterStemmer()
     
-# create sample documents
-# doc_a = 'We give necessary and sufficient conditions for the (bounded) law of the iterated logarithm for $U$-statistics in Hilbert spaces. As a tool we also develop moment and tail estimates for canonical Hilbert-space valued$U$-statistics of arbitrary order, which are of independent interest.'
-# doc_b = 'Generalization of the Kac integral and Kac method for paths measure based on the Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.' 
-
 # build doc set
 doc_set = arxiv_11['math']
 
@@ -114,10 +110,13 @@ for test in test_texts:
         topicIdx = pair[0]
         weight = pair[1]
         test_vec[topicIdx] = weight    
-
+    for i in range(len(topicPropArray)):
+        sim = scipy.spatial.distance.cosine(test_vec, topicPropArray[i])
+        print sim
+        sim_score.append(sim)    
     # print test_vec
     # print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
-    sim_score = [scipy.spatial.distance.cosine(test_vec, topicPropArray[i]) for i in range(len(topicPropArray))]
+    # sim_score = [scipy.spatial.distance.cosine(test_vec, topicPropArray[i]) for i in range(len(topicPropArray))]
     print sim_score
     #max_score = sim_score.max()
     #print max_score
