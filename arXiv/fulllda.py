@@ -85,7 +85,6 @@ test_set = arxiv_12['math'][0:1]
 
 # loop through test list
 for i in test_set:
-    print i
     # clean and tokenize document string
     raw = i.lower()
     tokens = tokenizer.tokenize(raw)
