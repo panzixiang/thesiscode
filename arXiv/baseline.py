@@ -26,17 +26,6 @@ en_stop = get_stop_words('en')
 # Create p_stemmer of class PorterStemmer
 p_stemmer = PorterStemmer()
     
-
-bigcatDict['astro'] = astro
-bigcatDict['cond'] = cond
-bigcatDict['cs'] = cs
-bigcatDict['hep'] = hep
-bigcatDict['math'] = math
-bigcatDict['physics'] = physics
-bigcatDict['qbio'] = qbio
-bigcatDict['qfin'] = qfin
-bigcatDict['quant'] = quant
-bigcatDict['stat'] = stat    
 # build doc set
 doc_set = arxiv_11['astro'] + arxiv_11['cond'] + \
           arxiv_11['cs'] + arxiv_11['hep'] + \
