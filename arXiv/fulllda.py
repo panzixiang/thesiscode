@@ -113,9 +113,9 @@ for test in test_texts:
         topicIdx = pair[0]
         weight = pair[1]
         test_vec[topicIdx] = weight
-    print test_vec
-    print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
-    simscore = [scipy.spatial.distance.cosine(test_vec, row) for row in topicPropArray]
+    # print test_vec
+    # print scipy.spatial.distance.cosine(test_vec, topicPropArray[0])
+    sim_score = [scipy.spatial.distance.jaccard(test_vec, row) for row in topicPropArray]
     max_score = np.amax(sim_score)
     print max_score
     confidence.append(max_score)
