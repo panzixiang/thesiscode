@@ -103,7 +103,7 @@ for i in test_set:
 # calculate similarity measure
 confidence = []
 for test in test_texts:
-    sim_score = []
+    sim_score = np.zeros(num_topics) 
     test_vec = np.zeros(num_topics)
     newProp = ldamodel[dictionary.doc2bow(test)]
     for pair in newProp:
@@ -111,6 +111,6 @@ for test in test_texts:
         weight = pair[1]
         test_vec[topicIdx] = weight    
     sim_score = [(1-scipy.spatial.distance.cosine(test_vec, row)) for row in topicPropArray]
-    max_score = sim_score.max()
+    max_score = np.amax(sim_score)
     #print max_score
     confidence.append(max_score)
