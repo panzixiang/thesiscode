@@ -12,8 +12,8 @@ import scipy as sp
 tokenizer = RegexpTokenizer(r'\w+')
 
 # load pickle
-arxiv_11 = pickle.load(open("2012_big_pop.p", "rb"))
-arxiv_12 = pickle.load(open("2011_big_pop.p", "rb"))
+arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
+arxiv_12 = pickle.load(open("2012_big_pop.p", "rb"))
 
 print "loaded pickles"
 
@@ -29,11 +29,10 @@ p_stemmer = PorterStemmer()
 
 # build doc set
 doc_set = arxiv_11['math']
-print doc_set[0]
 
 # list for tokenized documents in loop
 texts = []
-'''
+
 # loop through document list
 for i in doc_set:
     
@@ -76,7 +75,7 @@ for i in range(len(texts)):
         topicIdx = pair[0]
         weight = pair[1]
         topicPropArray[i, topicIdx] = weight
-'''
+
 print "matrix built"
 print "------------------"
 print "testing"
@@ -84,12 +83,11 @@ print "testing"
 # test on new data
 test_set = arxiv_12['math']
 test_set = test_set[0:9]
-print test_set[0]
 
 # loop through test list
 for i in test_set:
     # clean and tokenize document string
-    raw = i.lower()
+    raw = ' '.join(i).lower()
     tokens = tokenizer.tokenize(raw)
 
     # remove stop words from tokens
