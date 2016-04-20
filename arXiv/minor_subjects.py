@@ -13,4 +13,4 @@ topicDict['qfin'] = 9
 topicDict['quant'] = 28
 topicDict['stat'] = 2
 
-pickle.dump(bigcatDict, open("minor_subjects.p", "wb"))   
+pickle.dump(topicDict, open("minor_subjects.p", "wb"))   
