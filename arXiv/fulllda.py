@@ -7,7 +7,7 @@ import pickle
 import csv
 import sys
 import numpy as np
-import scipy as sp
+import scipy
 
 tokenizer = RegexpTokenizer(r'\w+')
 
