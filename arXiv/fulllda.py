@@ -84,6 +84,7 @@ print "testing"
 # test on new data
 test_set = arxiv_12['math']
 test_set = test_set[0:9]
+print test_set[0]
 
 # loop through test list
 for i in test_set:
