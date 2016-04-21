@@ -98,13 +98,13 @@ print "------------------"
 print "testing"
 
 # test on new data
-test_set = arxiv_12['astro'][0:9] + arxiv_12['cond'][0:9] + \
-          arxiv_12['cs'][0:9] + arxiv_12['hep'][0:9] + \
-          arxiv_12['math'][0:9] + arxiv_12['physics'][0:9] + \
-          arxiv_12['qbio'][0:9] + arxiv_12['qfin'][0:9] + \
-          arxiv_12['quant'][0:9] + arxiv_12['stat'][0:9] 
-test_label = [1]*10 + [2]*10 + [3]*10 + [4]*10 + [5]*10 + \
-             [6]*10 + [7]*10 + [8]*10 + [9]*10 + [10]*10  
+test_set = arxiv_12['astro'][0:99] + arxiv_12['cond'][0:99] + \
+          arxiv_12['cs'][0:99] + arxiv_12['hep'][0:99] + \
+          arxiv_12['math'][0:99] + arxiv_12['physics'][0:9] + \
+          arxiv_12['qbio'][0:99] + arxiv_12['qfin'][0:99] + \
+          arxiv_12['quant'][0:99] + arxiv_12['stat'][0:99] 
+test_label = [1]*100 + [2]*100 + [3]*100 + [4]*100 + [5]*100 + \
+             [6]*100 + [7]*100 + [8]*100 + [9]*100 + [10]*100  
 
 test_texts = []
 
@@ -125,7 +125,7 @@ for i in test_set:
 
 # calculate similarity measure
 confidence = []
-testPropArray = np.zeros((100, num_topics))
+testPropArray = np.zeros((1000, num_topics))
 for i in range(len(test_texts)):
     test = test_texts[i]
     testProp = ldamodel[dictionary.doc2bow(test)]
@@ -156,7 +156,7 @@ print zero_one_loss(predictions, y_test)
 print '--------------------------------'
 
 # svmlin
-svmlin = svm.SVC(kernel='lin')
+svmlin = svm.SVC(kernel='linear')
 svmlin.fit(X_train, y_train)
 predictions = svmlin.predict(X_test)
 # print predictions
