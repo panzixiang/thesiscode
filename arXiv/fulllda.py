@@ -12,21 +12,12 @@ import numpy as np
 import scipy
 
 def main():
-
-    tokenizer = RegexpTokenizer(r'\w+')
-
     # load pickle
     arxiv_11 = pickle.load(open("2011_big_pop.p", "rb"))
     arxiv_12 = pickle.load(open("2012_big_pop.p", "rb"))
 
     print "loaded pickles"
 
-    # create English stop words list
-    en_stop = get_stop_words('en')
-
-    # Create p_stemmer of class PorterStemmer
-    p_stemmer = PorterStemmer()
-        
     # build doc set
     doc_set = arxiv_11['math'] + arxiv_11['astro']
     label_set = [1]*len(arxiv_11['math']) + [2]*len(arxiv_11['astro'])
@@ -140,6 +131,14 @@ def main():
 
 
 def tokenize(doc_set):
+    # create English stop words list
+    en_stop = get_stop_words('en')
+
+    # Create p_stemmer of class PorterStemmer
+    p_stemmer = PorterStemmer()
+
+    # create tokenizer
+    tokenizer = RegexpTokenizer(r'\w+')
     doc_texts = []    
     # loop through document list
     for i in doc_set:
