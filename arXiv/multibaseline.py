@@ -125,7 +125,7 @@ for i in test_set:
 
 # calculate similarity measure
 confidence = []
-testPropArray = np.zeros((20, num_topics))
+testPropArray = np.zeros((100, num_topics))
 for i in range(len(test_texts)):
     test = test_texts[i]
     testProp = ldamodel[dictionary.doc2bow(test)]
@@ -136,6 +136,7 @@ for i in range(len(test_texts)):
 
 # all testing
 X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label
+
 # knn3
 knn3 = KNeighborsClassifier(n_neighbors=3)
 knn3.fit(X_train, y_train)
@@ -153,6 +154,16 @@ predictions = knn5.predict(X_test)
 print 'knn5'
 print zero_one_loss(predictions, y_test)
 print '--------------------------------'
+
+# svmlin
+svmlin = svm.SVC(kernel='lin')
+svmlin.fit(X_train, y_train)
+predictions = svmlin.predict(X_test)
+# print predictions
+print 'svmlin'
+print zero_one_loss(predictions, y_test)
+print '--------------------------------'
+
 
 # svmrbf
 svmrbf = svm.SVC(kernel='rbf')

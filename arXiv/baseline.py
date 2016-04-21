@@ -118,7 +118,7 @@ for i in test_set:
 
 # calculate similarity measure
 confidence = []
-testPropArray = np.zeros((20, num_topics))
+testPropArray = np.zeros(10, num_topics))
 for i in range(len(test_texts)):
     test = test_texts[i]
     testProp = ldamodel[dictionary.doc2bow(test)]
