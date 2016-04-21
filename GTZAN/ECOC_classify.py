@@ -24,7 +24,7 @@ def main():
     
     filenameLB = 'mfcc_lb.csv'
     allsongcat = pickle.load(open('mfcc_fv.p', 'rb'))
-    #hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
+    hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
     
     with open('mfcc_lb.csv') as f:
         reader = csv.reader(f)
@@ -55,7 +55,7 @@ def main():
     Y = np.array(trainingLB)
 
     '''
-    l=[allsongcat]
+    l=[allsongcat,hcdf]
     all_feats = combineFeatures(l)
     feats_shuf = []
     labels_shuf = []
