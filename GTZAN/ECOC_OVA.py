@@ -74,16 +74,16 @@ def main():
     #rf = RandomForestClassifier(n_estimators=50, max_features = 'log2')
     sgd = SGDClassifier(loss="hinge", penalty="l2")
     #svc = svm.SVC(kernel='linear')
-    #dtree = DecisionTreeClassifier(max_depth =3)
+    dtree = DecisionTreeClassifier(max_depth =3)
     lsvc = LinearSVC(random_state=0)
-    cla = OneVsRestClassifier(sgd)
+    cla = OneVsRestClassifier(dtree)
 
     cm_all = np.zeros((10,10), dtype=np.int)
 
     cb = np.zeros((10,20))
     losses = []
    
-    with open('ECOC_sgd_OVA.csv','w') as f1:
+    with open('ECOC_dtree_OVA.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
         scores = 0.0
         for train, test in kf:
