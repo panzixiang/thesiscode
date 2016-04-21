@@ -26,7 +26,7 @@ def main():
     
     filenameLB = 'mfcc_lb.csv'
     allsongcat = pickle.load(open('mfcc_fv.p', 'rb'))
-    #hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
+    hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
     
     with open('mfcc_lb.csv') as f:
         reader = csv.reader(f)
@@ -57,7 +57,7 @@ def main():
     Y = np.array(trainingLB)
 
     '''
-    l=[allsongcat]
+    l=[allsongcat, hcdf]
     all_feats = combineFeatures(l)
     feats_shuf = []
     labels_shuf = []
@@ -84,7 +84,7 @@ def main():
     cb = np.zeros((10,20))
     losses = []
    
-    with open('ECOC_dtree_OVO.csv','w') as f1:
+    with open('ECOC_sgd_OVO.csv','w') as f1:
         wrtest = csv.writer(f1, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
         scores = 0.0
         for train, test in kf:
