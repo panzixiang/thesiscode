@@ -140,22 +140,22 @@ def main():
 
 
 def tokenize(doc_set):
-doc_texts = []    
-# loop through document list
-for i in doc_set:
-    
-    # clean and tokenize document string
-    raw = i.lower()
-    tokens = tokenizer.tokenize(raw)
+    doc_texts = []    
+    # loop through document list
+    for i in doc_set:
+        
+        # clean and tokenize document string
+        raw = i.lower()
+        tokens = tokenizer.tokenize(raw)
 
-    # remove stop words from tokens
-    stopped_tokens = [i for i in tokens if not i in en_stop]
-    
-    # stem tokens
-    stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
-    
-    # add tokens to list
-    doc_texts.append(stemmed_tokens)
+        # remove stop words from tokens
+        stopped_tokens = [i for i in tokens if not i in en_stop]
+        
+        # stem tokens
+        stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
+        
+        # add tokens to list
+        doc_texts.append(stemmed_tokens)
 
 return doc_texts   
 
