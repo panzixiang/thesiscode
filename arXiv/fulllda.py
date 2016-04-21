@@ -68,7 +68,7 @@ def main():
     # build math topic proportion matrix
     mathtopicPropArray = np.zeros((len(doc_texts), 120))
     for i in range(len(doc_texts)):
-        text = math_texts[i]
+        text = doc_texts[i]
         textProp = mathldamodel[dictionary.doc2bow(text)]
         for pair in textProp:
             topicIdx = pair[0]
@@ -78,7 +78,7 @@ def main():
     # build astro topic proportion matrix
     astrotopicPropArray = np.zeros((len(doc_texts), 60))
     for i in range(len(doc_texts)):
-        text = astro_texts[i]
+        text = doc_texts[i]
         textProp = astroldamodel[dictionary.doc2bow(text)]
         for pair in textProp:
             topicIdx = pair[0]
