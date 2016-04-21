@@ -157,7 +157,7 @@ def tokenize(doc_set):
         # add tokens to list
         doc_texts.append(stemmed_tokens)
 
-return doc_texts   
+    return doc_texts   
 
 if __name__ == "__main__":
     main()     
