@@ -104,6 +104,7 @@ def main():
   knn3 = KNeighborsClassifier(n_neighbors=3)
   knn3.fit(X_train, y_train)
   predictions = knn3.predict(X_test)
+  np.savetxt('knn3pred.csv', predictions, delimiter=',')
   # print predictions
   print 'knn3'
   print zero_one_loss(predictions, y_test)
@@ -113,6 +114,7 @@ def main():
   knn5 = KNeighborsClassifier(n_neighbors=5)
   knn5.fit(X_train, y_train)
   predictions = knn5.predict(X_test)
+  np.savetxt('knn5pred.csv', predictions, delimiter=',')
   # print predictions
   print 'knn5'
   print zero_one_loss(predictions, y_test)
@@ -122,14 +124,15 @@ def main():
   svmlin = svm.SVC(kernel='linear')
   svmlin.fit(X_train, y_train)
   predictions = svmlin.predict(X_test)
+  np.savetxt('svmlinpred.csv', predictions, delimiter=',')
   # print predictions
   print 'svmlin'
   print zero_one_loss(predictions, y_test)
   print '--------------------------------'
 
   # Compute confusion matrix
-  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  np.savetxt('cm-lin.csv', cm, delimiter=',')
+  #cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  #np.savetxt('cm-lin.csv', cm, delimiter=',')
   '''
   np.set_printoptions(precision=2)
   plt.figure()
@@ -138,19 +141,11 @@ def main():
   plt.imasve('smv_confusion', cm, cmap=plt.cm.viridis)
   '''
 
-  # svmrbf
-  svmrbf = svm.SVC(kernel='rbf')
-  svmrbf.fit(X_train, y_train)
-  predictions = svmrbf.predict(X_test)
-  # print predictions
-  print 'svmrbf'
-  print zero_one_loss(predictions, y_test)
-  print '--------------------------------'
-
   # gnb
   gnb = GaussianNB()
   gnb.fit(X_train, y_train)
   predictions = gnb.predict(X_test)
+  np.savetxt('gnbpred.csv', predictions, delimiter=',')
   # print predictions
   print 'gnb'
   print zero_one_loss(predictions, y_test)
@@ -160,6 +155,7 @@ def main():
   rf50 = RandomForestClassifier(n_estimators=50)
   rf50.fit(X_train, y_train)
   predictions = rf50.predict(X_test)
+  np.savetxt('rf50pred.csv', predictions, delimiter=',')
   # print predictions
   print 'rf50'
   print zero_one_loss(predictions, y_test)
