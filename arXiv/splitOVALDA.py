@@ -48,7 +48,7 @@ def main():
     topic_superset.append(arxiv_11['qbio'])
     topic_superset.append(arxiv_11['qfin'])
     topic_superset.append(arxiv_11['quant'])
-    topic_superset.append(arxiv_11['stats'])
+    topic_superset.append(arxiv_11['stat'])
 
     # build individual lda
     lda_superset = []
