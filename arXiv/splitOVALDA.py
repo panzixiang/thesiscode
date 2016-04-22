@@ -61,7 +61,7 @@ def main():
         dictionary = corpora.Dictionary(topic_texts)
             
         # convert tokenized documents into a document-term matrix
-        corpus = [dictionary.doc2bow(text) for text in math_texts]
+        corpus = [dictionary.doc2bow(text) for text in topic_texts]
 
         # generate LDA model
         num_topics = math.floor(len(topic_set))
