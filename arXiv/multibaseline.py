@@ -129,11 +129,14 @@ def main():
 
   # Compute confusion matrix
   cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  np.savetxt('cm-lin.csv', cm, delimiter=',')
+  '''
   np.set_printoptions(precision=2)
   plt.figure()
   plot_confusion_matrix(cm)
   #plt.show()
   plt.imasve('smv_confusion', cm, cmap=plt.cm.viridis)
+  '''
 
   # svmrbf
   svmrbf = svm.SVC(kernel='rbf')
