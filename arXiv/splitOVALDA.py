@@ -86,7 +86,7 @@ def main():
         prop_array_superset.append(topicPropArray)        
 
     # concat full feature array
-    for topicPropArray in prop_array_superset
+    for topicPropArray in prop_array_superset:
         trainingArray = np.concatenate((trainingArray, topicPropArray), axis = 1)
 
 
@@ -120,7 +120,7 @@ def main():
         test_prop_array_superset.append(testPropArray)   
 
     # concat full test array  
-    for testPropArray in test_prop_array_superset
+    for testPropArray in test_prop_array_superset:
         testArray = np.concatenate((testArray, testPropArray), axis = 1)
 
     cla = svm.SVC(kernel='linear')
