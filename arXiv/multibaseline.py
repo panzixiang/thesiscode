@@ -87,7 +87,7 @@ def main():
 
   test_texts = tokenize(test_set)
 
-  # buil test features
+  # build test features
   testPropArray = np.zeros((1000, num_topics))
   for i in range(len(test_texts)):
       test = test_texts[i]
@@ -132,8 +132,8 @@ def main():
   np.set_printoptions(precision=2)
   plt.figure()
   plot_confusion_matrix(cm)
-  plt.show()
-
+  #plt.show()
+  plt.imasve('smv_confusion', cm, cmap=plt.cm.viridis)
 
   # svmrbf
   svmrbf = svm.SVC(kernel='rbf')
