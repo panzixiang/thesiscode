@@ -37,8 +37,8 @@ def main():
   label_set = [1]*len(arxiv_11['astro']) + [2]*len(arxiv_11['cond']) + \
               [3]*len(arxiv_11['cs']) + [4]*len(arxiv_11['hep']) + \
               [5]*len(arxiv_11['math']) + [6]*len(arxiv_11['physics']) + \
-              [7]*len(arxiv_11['qbio']) + [9]*len(arxiv_11['qfin']) + \
-              [10]*len(arxiv_11['quant']) + [10]*len(arxiv_11['stat']) 
+              [7]*len(arxiv_11['qbio']) + [8]*len(arxiv_11['qfin']) + \
+              [9]*len(arxiv_11['quant']) + [10]*len(arxiv_11['stat']) 
 
   # list for tokenized documents in loop
   texts = tokenize(doc_set)
