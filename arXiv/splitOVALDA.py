@@ -64,9 +64,9 @@ def main():
         corpus = [dictionary.doc2bow(text) for text in topic_texts]
 
         # generate LDA model
-        num_topics = math.floor(len(topic_set))
+        num_topics = math.floor(len(topic_set)/100)
         num_topics_list.append(num_topics)
-        ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=20)
+        ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=10)
         lda_superset.append(ldamodel)
 
     print "all LDA built"    
