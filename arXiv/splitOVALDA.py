@@ -127,15 +127,18 @@ def main():
     X_train, X_test, y_train, y_test = trainingArray, testArray, label_set, test_label
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
+    myfile = open('splitova_pred.csv', 'wb')
+    wr = csv.writer(myfile, quoting=csv.NONNUMERIC)
+    wr.writerow(predictions)
     #print predictions
     print zero_one_loss(predictions, y_test)
 
     # Compute confusion matrix
-    cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-    np.set_printoptions(precision=2)
-    plt.figure()
-    plot_confusion_matrix(cm)
-    plt.show()
+    # cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+    # np.set_printoptions(precision=2)
+    # plt.figure()
+    # plot_confusion_matrix(cm)
+    # plt.show()
 
 
 def tokenize(doc_set):
