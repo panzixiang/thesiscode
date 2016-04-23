@@ -116,7 +116,7 @@ def main():
         testPropArray = np.zeros((1000, num_topics))
         for j in range(len(test_texts)):
             test = test_texts[i]
-            testProp = lda_superset[i][dictionary.doc2bow(test)]
+            testProp = lda_superset[i][dictionary[i].doc2bow(test)]
             for pair in testProp:
                 topicIdx = pair[0]
                 weight = pair[1]
