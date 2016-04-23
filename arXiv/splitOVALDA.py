@@ -53,12 +53,14 @@ def main():
     # build individual lda
     lda_superset = []
     num_topics_list = []
+    dictionary_set = []
 
     for topic_set in topic_superset:
         topic_texts = tokenize(topic_set)
 
         # turn our tokenized documents into a id - term dictionary
         dictionary = corpora.Dictionary(topic_texts)
+        dictionary_set.append(dictionary)
             
         # convert tokenized documents into a document-term matrix
         corpus = [dictionary.doc2bow(text) for text in topic_texts]
@@ -78,7 +80,7 @@ def main():
         topicPropArray = np.zeros((len(doc_texts), num_topics))
         for j in range(len(doc_texts)):
             text = doc_texts[i]
-            textProp = lda_superset[i][dictionary.doc2bow(text)]
+            textProp = lda_superset[i][dictionary_set[i].doc2bow(text)]
             for pair in textProp:
                 topicIdx = pair[0]
                 weight = pair[1]
