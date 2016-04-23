@@ -88,8 +88,10 @@ def main():
         prop_array_superset.append(topicPropArray)        
 
     # concat full feature array
-    for topicPropArray in prop_array_superset:
-        trainingArray = np.concatenate((trainingArray, topicPropArray), axis = 1)
+    trainingArray = prop_array_superset[0]
+    for i in range(len(prop_array_superset)):
+        if i != 0:
+            trainingArray = np.concatenate((trainingArray, prop_array_superset[i]), axis = 1)
 
 
     print "training matrix built"
