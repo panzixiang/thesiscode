@@ -17,7 +17,7 @@ import gensim
 import pickle
 import csv
 import sys
-import numpy as np
+import np as np
 import scipy
 
 def main():
@@ -112,8 +112,8 @@ def main():
   knn3.fit(X_train, y_train)
   predictions = knn3.predict(X_test)
   cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  numpy.savetxt('knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  numpy.savetxt('knn3cm.txt', cm.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('knn3cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn3'
   print zero_one_loss(predictions, y_test)
@@ -124,8 +124,8 @@ def main():
   knn5.fit(X_train, y_train)
   predictions = knn5.predict(X_test)
   cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  numpy.savetxt('knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  numpy.savetxt('knn5cm.txt', cm.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('knn5cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn5'
   print zero_one_loss(predictions, y_test)
@@ -136,8 +136,8 @@ def main():
   svmlin.fit(X_train, y_train)
   predictions = svmlin.predict(X_test)
   cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  numpy.savetxt('svmlinpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  numpy.savetxt('svmlincm.txt', cm.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('svmlinpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('svmlincm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'svmlin'
   print zero_one_loss(predictions, y_test)
@@ -159,8 +159,8 @@ def main():
   gnb.fit(X_train, y_train)
   predictions = gnb.predict(X_test)
   cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  numpy.savetxt('gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  numpy.savetxt('gnbcm.txt', cm.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('gnbcm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'gnb'
   print zero_one_loss(predictions, y_test)
@@ -171,8 +171,8 @@ def main():
   rf50.fit(X_train, y_train)
   predictions = rf50.predict(X_test)
   cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  numpy.savetxt('rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  numpy.savetxt('rf50cm.txt', cm.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('rf50cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'rf50'
   print zero_one_loss(predictions, y_test)
