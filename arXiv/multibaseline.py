@@ -82,9 +82,10 @@ def main():
             arxiv_12['math'][0:99] + arxiv_12['physics'][0:99] + \
             arxiv_12['qbio'][0:99] + arxiv_12['qfin'][0:99] + \
             arxiv_12['quant'][0:99] + arxiv_12['stat'][0:99] 
+  print "test_set length : " + str(len(test_set))          
   test_label = [1]*100 + [2]*100 + [3]*100 + [4]*100 + [5]*100 + \
                [6]*100 + [7]*100 + [8]*100 + [9]*100 + [10]*100  
-
+  print "test_label length : " + str(len(test_label))                
   test_texts = tokenize(test_set)
 
   # build test features
@@ -100,11 +101,19 @@ def main():
   # all testing
   X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label
 
+  print "training_array length: " + str(len(topicPropArray))
+  print "test_array length: " + str(len(testPropArray))
+  print "training_label length: " + str(len(label_set)) 
+  print "test_label length: " + str(len(test_label))
+  print '--------------------------------'
+  
   # knn3
   knn3 = KNeighborsClassifier(n_neighbors=3)
   knn3.fit(X_train, y_train)
   predictions = knn3.predict(X_test)
-  np.savetxt('knn3pred.csv', predictions, delimiter=',')
+  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  numpy.savetxt('knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  numpy.savetxt('knn3cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn3'
   print zero_one_loss(predictions, y_test)
@@ -114,7 +123,9 @@ def main():
   knn5 = KNeighborsClassifier(n_neighbors=5)
   knn5.fit(X_train, y_train)
   predictions = knn5.predict(X_test)
-  np.savetxt('knn5pred.csv', predictions, delimiter=',')
+  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  numpy.savetxt('knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  numpy.savetxt('knn5cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn5'
   print zero_one_loss(predictions, y_test)
@@ -124,7 +135,9 @@ def main():
   svmlin = svm.SVC(kernel='linear')
   svmlin.fit(X_train, y_train)
   predictions = svmlin.predict(X_test)
-  np.savetxt('svmlinpred.csv', predictions, delimiter=',')
+  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  numpy.savetxt('svmlinpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  numpy.savetxt('svmlincm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'svmlin'
   print zero_one_loss(predictions, y_test)
@@ -145,7 +158,9 @@ def main():
   gnb = GaussianNB()
   gnb.fit(X_train, y_train)
   predictions = gnb.predict(X_test)
-  np.savetxt('gnbpred.csv', predictions, delimiter=',')
+  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  numpy.savetxt('gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  numpy.savetxt('gnbcm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'gnb'
   print zero_one_loss(predictions, y_test)
@@ -155,7 +170,9 @@ def main():
   rf50 = RandomForestClassifier(n_estimators=50)
   rf50.fit(X_train, y_train)
   predictions = rf50.predict(X_test)
-  np.savetxt('rf50pred.csv', predictions, delimiter=',')
+  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  numpy.savetxt('rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  numpy.savetxt('rf50cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'rf50'
   print zero_one_loss(predictions, y_test)
