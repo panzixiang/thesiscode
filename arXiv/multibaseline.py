@@ -17,7 +17,7 @@ import gensim
 import pickle
 import csv
 import sys
-import np as np
+import numpy as np
 import scipy
 
 def main():
@@ -106,7 +106,7 @@ def main():
   print "training_label length: " + str(len(label_set)) 
   print "test_label length: " + str(len(test_label))
   print '--------------------------------'
-  
+
   # knn3
   knn3 = KNeighborsClassifier(n_neighbors=3)
   knn3.fit(X_train, y_train)
