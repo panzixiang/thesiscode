@@ -4,6 +4,7 @@ from nltk.stem.porter import PorterStemmer
 from gensim import corpora, models
 from sklearn import svm
 from sklearn.metrics import zero_one_loss
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.cross_validation import KFold
