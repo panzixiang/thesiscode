@@ -134,7 +134,7 @@ def main():
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
     myfile = open('splitova_pred.csv', 'wb')
-    wr = csv.writer(myfile, quoting=csv.NONNUMERIC)
+    wr = csv.writer(myfile, quoting=csv.QUOTE_NONNUMERIC)
     wr.writerow(predictions)
     #print predictions
     print zero_one_loss(predictions, y_test)
