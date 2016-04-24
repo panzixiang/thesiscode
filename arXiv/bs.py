@@ -4,7 +4,7 @@ import sys
 import os
 import pickle
 
-soup = BeautifulSoup(open("2012_arxiv.xml"), "html5lib")
+soup = BeautifulSoup(open("2011_arxiv.xml"), "html5lib")
 #print(soup.prettify())
 
 #find all sub-categories
@@ -50,12 +50,12 @@ for i in range(len(pri_tagset)):
         astro.append(allabs[i])
     elif 'cond' in pri_tagset[i]:
         cond.append(allabs[i])
+    elif any(ext in pri_tagset[i] for ext in ['chao','gr-qc','nlin','nucl','physics']):
+        physics.append(allabs[i]) 
     elif 'cs' in pri_tagset[i]:
-        cs.append(allabs[i])
+        cs.append(allabs[i])   
     elif 'hep' in pri_tagset[i]:
         hep.append(allabs[i])
-    elif any(ext in pri_tagset[i] for ext in ['chao','gr-qc','nlin','nucl','physics']):
-        physics.append(allabs[i])
     elif 'math' in pri_tagset[i]:
         math.append(allabs[i])
     elif 'q-bio' in pri_tagset[i]:
