@@ -1,0 +1,27 @@
+loaded pickles
+LDA built
+matrix built
+------------------
+testing
+test_set length : 990
+test_label length : 1000
+training_array length: 46568
+test_array length: 1000
+training_label length: 46568
+test_label length: 1000
+--------------------------------
+knn3
+0.622
+--------------------------------
+knn5
+0.616
+--------------------------------
+svmlin
+0.562
+--------------------------------
+gnb
+0.554
+--------------------------------
+rf50
+0.567
+--------------------------------

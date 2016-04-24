@@ -1,6 +1,0 @@
-loaded pickles
-all LDA built
-training matrix built
-------------------
-testing
-0.9
