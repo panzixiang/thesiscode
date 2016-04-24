@@ -86,5 +86,5 @@ bigcatDict['others'] = others
 for key in bigcatDict.iterkeys():
     print key+" "+str(len(bigcatDict[key]))
 
-pickle.dump(bigcatDict, open("2012_big_pop.p", "wb"))       
+pickle.dump(bigcatDict, open("2011_big_pop.p", "wb"))       
 
