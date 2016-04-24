@@ -101,7 +101,7 @@ def main():
     # test on new data
     test_set = arxiv_12['astro'][0:99] + arxiv_12['cond'][0:99] + \
                 arxiv_12['cs'][0:99] + arxiv_12['hep'][0:99] + \
-                arxiv_12['math'][0:99] + arxiv_12['physics'][0:9] + \
+                arxiv_12['math'][0:99] + arxiv_12['physics'][0:99] + \
                 arxiv_12['qbio'][0:99] + arxiv_12['qfin'][0:99] + \
                 arxiv_12['quant'][0:99] + arxiv_12['stat'][0:99] 
     test_label = [1]*100 + [2]*100 + [3]*100 + [4]*100 + [5]*100 + \
