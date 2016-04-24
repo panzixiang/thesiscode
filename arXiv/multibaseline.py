@@ -106,7 +106,7 @@ def main():
   print "training_label length: " + str(len(label_set)) 
   print "test_label length: " + str(len(test_label))
   print '--------------------------------'
-  '''
+  
   # knn3
   knn3 = KNeighborsClassifier(n_neighbors=3)
   knn3.fit(X_train, y_train)
@@ -177,7 +177,7 @@ def main():
   print 'rf50'
   print zero_one_loss(predictions, y_test)
   print '--------------------------------'
-  '''
+  
 
   # dtree ada
   ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
