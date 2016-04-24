@@ -32,8 +32,8 @@ def main():
     label_set = [1]*len(arxiv_11['astro']) + [2]*len(arxiv_11['cond']) + \
               [3]*len(arxiv_11['cs']) + [4]*len(arxiv_11['hep']) + \
               [5]*len(arxiv_11['math']) + [6]*len(arxiv_11['physics']) + \
-              [7]*len(arxiv_11['qbio']) + [9]*len(arxiv_11['qfin']) + \
-              [10]*len(arxiv_11['quant']) + [2]*len(arxiv_11['stat']) 
+              [7]*len(arxiv_11['qbio']) + [8]*len(arxiv_11['qfin']) + \
+              [9]*len(arxiv_11['quant']) + [10]*len(arxiv_11['stat']) 
 
     doc_texts = tokenize(doc_set)
 
@@ -141,11 +141,11 @@ def main():
 
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
-    myfile = open('splitova_pred.csv', 'wb')
-    wr = csv.writer(myfile, quoting=csv.QUOTE_NONNUMERIC)
-    wr.writerow(predictions)
+    np.savetxt('splitova_svmpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
     #print predictions
+    print 'splitova svm'
     print zero_one_loss(predictions, y_test)
+    print '--------------------------------'
 
     # Compute confusion matrix
     # cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
@@ -153,6 +153,16 @@ def main():
     # plt.figure()
     # plot_confusion_matrix(cm)
     # plt.show()
+
+
+    # gnb
+    gnb = GaussianNB()
+    gnb.fit(X_train, y_train)
+    predictions = gnb.predict(X_test)
+    np.savetxt('splitova_gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    print 'splitova gnb'
+    print zero_one_loss(predictions, y_test)
+    print '--------------------------------'
 
 
 def tokenize(doc_set):
