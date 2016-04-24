@@ -106,7 +106,7 @@ def main():
   print "training_label length: " + str(len(label_set)) 
   print "test_label length: " + str(len(test_label))
   print '--------------------------------'
-
+  '''
   # knn3
   knn3 = KNeighborsClassifier(n_neighbors=3)
   knn3.fit(X_train, y_train)
@@ -175,6 +175,24 @@ def main():
   np.savetxt('rf50cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'rf50'
+  print zero_one_loss(predictions, y_test)
+  print '--------------------------------'
+  '''
+
+  # dtree ada
+  ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
+    n_estimators=400,
+    learning_rate=1,
+    algorithm="SAMME",
+    random_state=None)
+    n_estimators = 400
+  ada.fit(X_train, y_train)
+  predictions = ada.predict(X_test)
+  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
+  np.savetxt('adapred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('adacm.txt', cm.astype(int), fmt='%i', delimiter=",")
+  # print predictions
+  print 'ada'
   print zero_one_loss(predictions, y_test)
   print '--------------------------------'
 
