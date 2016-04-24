@@ -185,7 +185,7 @@ def main():
     learning_rate=1,
     algorithm="SAMME",
     random_state=None)
-    n_estimators = 400
+  n_estimators = 400
   ada.fit(X_train, y_train)
   predictions = ada.predict(X_test)
   cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
