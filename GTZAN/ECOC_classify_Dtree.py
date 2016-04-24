@@ -75,7 +75,7 @@ def main():
     #svc = svm.SVC(kernel='linear')
     dtree = DecisionTreeClassifier(max_depth =3)
     lsvc = LinearSVC(random_state=0)
-    cla = OutputCodeClassifier(sgd,code_size=1, random_state=0)
+    cla = OutputCodeClassifier(sgd,code_size=128, random_state=0)
 
     cm_all = np.zeros((10,10), dtype=np.int)
 
