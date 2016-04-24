@@ -50,7 +50,7 @@ def main():
   corpus = [dictionary.doc2bow(text) for text in texts]
 
   # generate LDA model
-  num_topics = 460
+  num_topics = 450
   ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=20)
 
   print "LDA built"
