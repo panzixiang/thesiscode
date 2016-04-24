@@ -5,6 +5,7 @@ from gensim import corpora, models
 from sklearn import svm
 from sklearn.metrics import zero_one_loss
 from sklearn.metrics import confusion_matrix
+from sklearn.naive_bayes import GaussianNB
 import matplotlib.pyplot as plt
 import math
 import gensim
