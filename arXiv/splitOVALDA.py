@@ -79,12 +79,12 @@ def main():
         num_topics = num_topics_list[i]
         topicPropArray = np.zeros((len(doc_texts), num_topics))
         for j in range(len(doc_texts)):
-            text = doc_texts[i]
+            text = doc_texts[j]
             textProp = lda_superset[i][dictionary_set[i].doc2bow(text)]
             for pair in textProp:
                 topicIdx = pair[0]
                 weight = pair[1]
-                topicPropArray[i, topicIdx] = weight
+                topicPropArray[j, topicIdx] = weight
         prop_array_superset.append(topicPropArray)        
 
     # concat full feature array
@@ -115,12 +115,12 @@ def main():
         num_topics = num_topics_list[i]
         testPropArray = np.zeros((1000, num_topics))
         for j in range(len(test_texts)):
-            test = test_texts[i]
+            test = test_texts[j]
             testProp = lda_superset[i][dictionary_set[i].doc2bow(test)]
             for pair in testProp:
                 topicIdx = pair[0]
                 weight = pair[1]
-                testPropArray[i, topicIdx] = weight
+                testPropArray[j, topicIdx] = weight
         test_prop_array_superset.append(testPropArray)   
 
     # concat full test array 
@@ -131,6 +131,14 @@ def main():
 
     cla = svm.SVC(kernel='linear')
     X_train, X_test, y_train, y_test = trainingArray, testArray, label_set, test_label
+
+
+    print "training_array length: " + str(len(topicPropArray))
+    print "test_array length: " + str(len(testPropArray))
+    print "training_label length: " + str(len(label_set)) 
+    print "test_label length: " + str(len(test_label))
+    print '--------------------------------'
+
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
     myfile = open('splitova_pred.csv', 'wb')
