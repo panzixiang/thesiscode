@@ -11,6 +11,7 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import zero_one_loss
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import gensim
