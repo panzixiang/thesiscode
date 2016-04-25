@@ -142,80 +142,80 @@ def main():
     X_train, X_test, y_train, y_test = trainingArray, testArray, label_set, test_label
 
 
-  # all testing
-  X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label
+    # all testing
+    X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label  
 
-  print "training_array length: " + str(len(topicPropArray))
-  print "test_array length: " + str(len(testPropArray))
-  print "training_label length: " + str(len(label_set)) 
-  print "test_label length: " + str(len(test_label))
-  print '--------------------------------'
-  
-  # knn3
-  knn3 = KNeighborsClassifier(n_neighbors=3)
-  knn3.fit(X_train, y_train)
-  predictions = knn3.predict(X_test)
-  np.savetxt('splitova_knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  # print predictions
-  print 'knn3'
-  print zero_one_loss(predictions, y_test)
-  print '--------------------------------'
+    print "training_array length: " + str(len(topicPropArray))
+    print "test_array length: " + str(len(testPropArray))
+    print "training_label length: " + str(len(label_set)) 
+    print "test_label length: " + str(len(test_label))
+    print '--------------------------------'
+    
+    # knn3
+    knn3 = KNeighborsClassifier(n_neighbors=3)
+    knn3.fit(X_train, y_train)
+    predictions = knn3.predict(X_test)
+    np.savetxt('splitova_knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    # print predictions
+    print 'knn3'
+    print zero_one_loss(predictions, y_test)
+    print '--------------------------------'  
 
-  # knn5
-  knn5 = KNeighborsClassifier(n_neighbors=5)
-  knn5.fit(X_train, y_train)
-  predictions = knn5.predict(X_test)
-  np.savetxt('splitova_knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  # print predictions
-  print 'knn5'
-  print zero_one_loss(predictions, y_test)
-  print '--------------------------------'
+    # knn5
+    knn5 = KNeighborsClassifier(n_neighbors=5)
+    knn5.fit(X_train, y_train)
+    predictions = knn5.predict(X_test)
+    np.savetxt('splitova_knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    # print predictions
+    print 'knn5'
+    print zero_one_loss(predictions, y_test)
+    print '--------------------------------'  
 
-  # svmlin
-  svmlin = svm.SVC(kernel='linear')
-  svmlin.fit(X_train, y_train)
-  predictions = svmlin.predict(X_test)
-  np.savetxt('splitova_svmpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  # print predictions
-  print 'svmlin'
-  print zero_one_loss(predictions, y_test)
-  print '--------------------------------'
+    # svmlin
+    svmlin = svm.SVC(kernel='linear')
+    svmlin.fit(X_train, y_train)
+    predictions = svmlin.predict(X_test)
+    np.savetxt('splitova_svmpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    # print predictions
+    print 'svmlin'
+    print zero_one_loss(predictions, y_test)
+    print '--------------------------------'  
 
-  # gnb
-  gnb = GaussianNB()
-  gnb.fit(X_train, y_train)
-  predictions = gnb.predict(X_test)
-  np.savetxt('splitova_gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  # print predictions
-  print 'gnb'
-  print zero_one_loss(predictions, y_test)
-  print '--------------------------------'
+    # gnb
+    gnb = GaussianNB()
+    gnb.fit(X_train, y_train)
+    predictions = gnb.predict(X_test)
+    np.savetxt('splitova_gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    # print predictions
+    print 'gnb'
+    print zero_one_loss(predictions, y_test)
+    print '--------------------------------'  
 
-  # rf50
-  rf50 = RandomForestClassifier(n_estimators=50)
-  rf50.fit(X_train, y_train)
-  predictions = rf50.predict(X_test)
-  np.savetxt('splitova_rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  # print predictions
-  print 'rf50'
-  print zero_one_loss(predictions, y_test)
-  print '--------------------------------'
-  
+    # rf50
+    rf50 = RandomForestClassifier(n_estimators=50)
+    rf50.fit(X_train, y_train)
+    predictions = rf50.predict(X_test)
+    np.savetxt('splitova_rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    # print predictions
+    print 'rf50'
+    print zero_one_loss(predictions, y_test)
+    print '--------------------------------'
+      
 
-  # dtree ada
-  ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
-    n_estimators=400,
-    learning_rate=1,
-    algorithm="SAMME",
-    random_state=None)
-  n_estimators = 400
-  ada.fit(X_train, y_train)
-  predictions = ada.predict(X_test)
-  np.savetxt('splitova_adapred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  # print predictions
-  print 'ada'
-  print zero_one_loss(predictions, y_test)
-  print '--------------------------------'
+    # dtree ada
+    ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
+      n_estimators=400,
+      learning_rate=1,
+      algorithm="SAMME",
+      random_state=None)
+    n_estimators = 400
+    ada.fit(X_train, y_train)
+    predictions = ada.predict(X_test)
+    np.savetxt('splitova_adapred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    # print predictions
+    print 'ada'
+    print zero_one_loss(predictions, y_test)
+    print '--------------------------------'
 
 
 def tokenize(doc_set):
