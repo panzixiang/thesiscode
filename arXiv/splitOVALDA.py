@@ -4,8 +4,16 @@ from nltk.stem.porter import PorterStemmer
 from gensim import corpora, models
 from sklearn import svm
 from sklearn.metrics import zero_one_loss
-from sklearn.metrics import confusion_matrix
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.cross_validation import KFold
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import zero_one_loss
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import math
 import gensim
@@ -134,36 +142,80 @@ def main():
     X_train, X_test, y_train, y_test = trainingArray, testArray, label_set, test_label
 
 
-    print "training_array length: " + str(len(topicPropArray))
-    print "test_array length: " + str(len(testPropArray))
-    print "training_label length: " + str(len(label_set)) 
-    print "test_label length: " + str(len(test_label))
-    print '--------------------------------'
+  # all testing
+  X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label
 
-    cla.fit(X_train, y_train)
-    predictions = cla.predict(X_test)
-    np.savetxt('splitova_svmpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-    #print predictions
-    print 'splitova svm'
-    print zero_one_loss(predictions, y_test)
-    print '--------------------------------'
+  print "training_array length: " + str(len(topicPropArray))
+  print "test_array length: " + str(len(testPropArray))
+  print "training_label length: " + str(len(label_set)) 
+  print "test_label length: " + str(len(test_label))
+  print '--------------------------------'
+  
+  # knn3
+  knn3 = KNeighborsClassifier(n_neighbors=3)
+  knn3.fit(X_train, y_train)
+  predictions = knn3.predict(X_test)
+  np.savetxt('knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  # print predictions
+  print 'knn3'
+  print zero_one_loss(predictions, y_test)
+  print '--------------------------------'
 
-    # Compute confusion matrix
-    # cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-    # np.set_printoptions(precision=2)
-    # plt.figure()
-    # plot_confusion_matrix(cm)
-    # plt.show()
+  # knn5
+  knn5 = KNeighborsClassifier(n_neighbors=5)
+  knn5.fit(X_train, y_train)
+  predictions = knn5.predict(X_test)
+  np.savetxt('knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  # print predictions
+  print 'knn5'
+  print zero_one_loss(predictions, y_test)
+  print '--------------------------------'
 
+  # svmlin
+  svmlin = svm.SVC(kernel='linear')
+  svmlin.fit(X_train, y_train)
+  predictions = svmlin.predict(X_test)
+  np.savetxt('svmlinpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  # print predictions
+  print 'svmlin'
+  print zero_one_loss(predictions, y_test)
+  print '--------------------------------'
 
-    # gnb
-    gnb = GaussianNB()
-    gnb.fit(X_train, y_train)
-    predictions = gnb.predict(X_test)
-    np.savetxt('splitova_gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-    print 'splitova gnb'
-    print zero_one_loss(predictions, y_test)
-    print '--------------------------------'
+  # gnb
+  gnb = GaussianNB()
+  gnb.fit(X_train, y_train)
+  predictions = gnb.predict(X_test)
+  np.savetxt('gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  # print predictions
+  print 'gnb'
+  print zero_one_loss(predictions, y_test)
+  print '--------------------------------'
+
+  # rf50
+  rf50 = RandomForestClassifier(n_estimators=50)
+  rf50.fit(X_train, y_train)
+  predictions = rf50.predict(X_test)
+  np.savetxt('rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  # print predictions
+  print 'rf50'
+  print zero_one_loss(predictions, y_test)
+  print '--------------------------------'
+  
+
+  # dtree ada
+  ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=3),
+    n_estimators=400,
+    learning_rate=1,
+    algorithm="SAMME",
+    random_state=None)
+  n_estimators = 400
+  ada.fit(X_train, y_train)
+  predictions = ada.predict(X_test)
+  np.savetxt('adapred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  # print predictions
+  print 'ada'
+  print zero_one_loss(predictions, y_test)
+  print '--------------------------------'
 
 
 def tokenize(doc_set):
