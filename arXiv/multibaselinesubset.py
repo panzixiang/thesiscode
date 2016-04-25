@@ -142,17 +142,6 @@ def main():
   print zero_one_loss(predictions, y_test)
   print '--------------------------------'
 
-  # Compute confusion matrix
-  #cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  #np.savetxt('cm-lin.csv', cm, delimiter=',')
-  '''
-  np.set_printoptions(precision=2)
-  plt.figure()
-  plot_confusion_matrix(cm)
-  #plt.show()
-  plt.imasve('smv_confusion', cm, cmap=plt.cm.viridis)
-  '''
-
   # gnb
   gnb = GaussianNB()
   gnb.fit(X_train, y_train)
@@ -222,3 +211,6 @@ def tokenize(doc_set):
         doc_texts.append(stemmed_tokens)
 
     return doc_texts   
+
+if __name__ == "__main__":
+    main()     

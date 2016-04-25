@@ -240,18 +240,7 @@ def tokenize(doc_set):
         # add tokens to list
         doc_texts.append(stemmed_tokens)
 
-    return doc_texts   
-
-def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.YlGnBu):
-    plt.imshow(cm, interpolation='nearest', cmap='viridis', vmin=0, vmax=100)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(10)
-    plt.xticks(tick_marks, ['astro', 'cond', 'cs', 'hep', 'math','physics', 'q-bio', 'q-fin', 'quant', 'stat'], rotation=45)
-    plt.yticks(tick_marks, ['astro', 'cond', 'cs', 'hep', 'math','physics', 'q-bio', 'q-fin', 'quant', 'stat'])
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')    
+    return doc_texts      
 
 if __name__ == "__main__":
     main()     
