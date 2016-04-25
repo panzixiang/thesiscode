@@ -113,9 +113,7 @@ def main():
   knn3 = KNeighborsClassifier(n_neighbors=3)
   knn3.fit(X_train, y_train)
   predictions = knn3.predict(X_test)
-  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
   np.savetxt('knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  np.savetxt('knn3cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn3'
   print zero_one_loss(predictions, y_test)
@@ -125,9 +123,7 @@ def main():
   knn5 = KNeighborsClassifier(n_neighbors=5)
   knn5.fit(X_train, y_train)
   predictions = knn5.predict(X_test)
-  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
   np.savetxt('knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  np.savetxt('knn5cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn5'
   print zero_one_loss(predictions, y_test)
@@ -137,32 +133,17 @@ def main():
   svmlin = svm.SVC(kernel='linear')
   svmlin.fit(X_train, y_train)
   predictions = svmlin.predict(X_test)
-  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
   np.savetxt('svmlinpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  np.savetxt('svmlincm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'svmlin'
   print zero_one_loss(predictions, y_test)
   print '--------------------------------'
 
-  # Compute confusion matrix
-  #cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
-  #np.savetxt('cm-lin.csv', cm, delimiter=',')
-  '''
-  np.set_printoptions(precision=2)
-  plt.figure()
-  plot_confusion_matrix(cm)
-  #plt.show()
-  plt.imasve('smv_confusion', cm, cmap=plt.cm.viridis)
-  '''
-
   # gnb
   gnb = GaussianNB()
   gnb.fit(X_train, y_train)
   predictions = gnb.predict(X_test)
-  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
   np.savetxt('gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  np.savetxt('gnbcm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'gnb'
   print zero_one_loss(predictions, y_test)
@@ -172,9 +153,7 @@ def main():
   rf50 = RandomForestClassifier(n_estimators=50)
   rf50.fit(X_train, y_train)
   predictions = rf50.predict(X_test)
-  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
   np.savetxt('rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  np.savetxt('rf50cm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'rf50'
   print zero_one_loss(predictions, y_test)
@@ -190,9 +169,7 @@ def main():
   n_estimators = 400
   ada.fit(X_train, y_train)
   predictions = ada.predict(X_test)
-  cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
   np.savetxt('adapred.csv', predictions.astype(int), fmt='%i', delimiter=",")
-  np.savetxt('adacm.txt', cm.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'ada'
   print zero_one_loss(predictions, y_test)
