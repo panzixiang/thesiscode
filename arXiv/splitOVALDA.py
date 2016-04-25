@@ -155,7 +155,7 @@ def main():
   knn3 = KNeighborsClassifier(n_neighbors=3)
   knn3.fit(X_train, y_train)
   predictions = knn3.predict(X_test)
-  np.savetxt('knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('splitova_knn3pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn3'
   print zero_one_loss(predictions, y_test)
@@ -165,7 +165,7 @@ def main():
   knn5 = KNeighborsClassifier(n_neighbors=5)
   knn5.fit(X_train, y_train)
   predictions = knn5.predict(X_test)
-  np.savetxt('knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('splitova_knn5pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'knn5'
   print zero_one_loss(predictions, y_test)
@@ -175,7 +175,7 @@ def main():
   svmlin = svm.SVC(kernel='linear')
   svmlin.fit(X_train, y_train)
   predictions = svmlin.predict(X_test)
-  np.savetxt('svmlinpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('splitova_svmpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'svmlin'
   print zero_one_loss(predictions, y_test)
@@ -185,7 +185,7 @@ def main():
   gnb = GaussianNB()
   gnb.fit(X_train, y_train)
   predictions = gnb.predict(X_test)
-  np.savetxt('gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('splitova_gnbpred.csv', predictions.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'gnb'
   print zero_one_loss(predictions, y_test)
@@ -195,7 +195,7 @@ def main():
   rf50 = RandomForestClassifier(n_estimators=50)
   rf50.fit(X_train, y_train)
   predictions = rf50.predict(X_test)
-  np.savetxt('rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('splitova_rf50pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'rf50'
   print zero_one_loss(predictions, y_test)
@@ -211,7 +211,7 @@ def main():
   n_estimators = 400
   ada.fit(X_train, y_train)
   predictions = ada.predict(X_test)
-  np.savetxt('adapred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+  np.savetxt('splitova_adapred.csv', predictions.astype(int), fmt='%i', delimiter=",")
   # print predictions
   print 'ada'
   print zero_one_loss(predictions, y_test)
