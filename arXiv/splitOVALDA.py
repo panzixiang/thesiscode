@@ -141,10 +141,6 @@ def main():
     cla = svm.SVC(kernel='linear')
     X_train, X_test, y_train, y_test = trainingArray, testArray, label_set, test_label
 
-
-    # all testing
-    X_train, X_test, y_train, y_test = topicPropArray, testPropArray, label_set, test_label  
-
     print "training_array length: " + str(len(topicPropArray))
     print "test_array length: " + str(len(testPropArray))
     print "training_label length: " + str(len(label_set)) 
