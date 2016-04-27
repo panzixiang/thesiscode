@@ -8,6 +8,7 @@ from sklearn.multiclass import OutputCodeClassifier
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.linear_model import SGDClassifier
+from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import LinearSVC
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
@@ -143,8 +144,10 @@ def main():
     print '--------------------------------'
     
     # ova
+    # gnb
+    gnb = GaussianNB()
     sgd = SGDClassifier(loss="hinge", penalty="l2")
-    cla = OneVsOneClassifier(LinearSVC(random_state=0))
+    cla = OneVsOneClassifier(gnb)
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
     np.savetxt('ecocova_pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
