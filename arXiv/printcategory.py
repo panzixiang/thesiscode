@@ -8,7 +8,7 @@ def main():
     doc_set = arxiv_11[filename]
 
     for i, article in range(len(doc_set)), doc_set:
-        print i + '\t' article
+        print i + '\t' + article
 
 if __name__ == "__main__":
     main()             
