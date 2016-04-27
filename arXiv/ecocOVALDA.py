@@ -132,7 +132,6 @@ def main():
         if i !=0 :
             testArray = np.concatenate((testArray, test_prop_array_superset[i]), axis = 1)
 
-    cla = svm.SVC(kernel='linear')
     X_train, X_test, y_train, y_test = trainingArray, testArray, label_set, test_label
 
     print "training_array length: " + str(len(topicPropArray))
