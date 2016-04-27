@@ -9,7 +9,7 @@ def main():
 
     for article in doc_set:
         print article
-        print '\n'
+        print '\t'
 
 if __name__ == "__main__":
     main()             
