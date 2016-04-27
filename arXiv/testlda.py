@@ -25,7 +25,7 @@ p_stemmer = PorterStemmer()
 # doc_b = 'Generalization of the Kac integral and Kac method for paths measure based on the Levy distribution has been used to derive fractional diffusion equation. Application to nonlinear fractional Ginzburg-Landau equation is discussed.' 
 
 # build doc set
-doc_set = arxiv_11['math']
+doc_set = arxiv_11['physics']
 
 # list for tokenized documents in loop
 texts = []
@@ -56,7 +56,7 @@ dictionary = corpora.Dictionary(texts)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 # generate LDA model
-num_topics = 130
+num_topics = 63
 ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=20)
 
 print(ldamodel.print_topics(num_topics=10, num_words=5))
