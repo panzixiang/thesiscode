@@ -6,6 +6,7 @@ from sklearn.cross_validation import KFold
 from sklearn.metrics import zero_one_loss
 from sklearn.multiclass import OutputCodeClassifier
 from sklearn.multiclass import OneVsRestClassifier
+from sklearn.multiclass import OneVsOneClassifier
 from sklearn.linear_model import SGDClassifier
 from sklearn.svm import LinearSVC
 from sklearn.metrics import confusion_matrix
