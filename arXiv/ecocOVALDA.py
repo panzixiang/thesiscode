@@ -7,6 +7,7 @@ from sklearn.metrics import zero_one_loss
 from sklearn.multiclass import OutputCodeClassifier
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.linear_model import SGDClassifier
+from sklearn.svm import LinearSVC
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import math
@@ -142,7 +143,7 @@ def main():
     
     # ova
     sgd = SGDClassifier(loss="hinge", penalty="l2")
-    cla = OneVsRestClassifier(sgd)
+    cla = OneVsRestClassifier(LinearSVC(random_state=0))
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
     np.savetxt('ecocova_pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
