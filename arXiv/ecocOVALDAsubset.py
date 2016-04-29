@@ -146,7 +146,6 @@ def main():
     # ova
     # gnb
     gnb = GaussianNB()
-    sgd = SGDClassifier(loss="hinge", penalty="l2")
     cla = OneVsOneClassifier(gnb)
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
