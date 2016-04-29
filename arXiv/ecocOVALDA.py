@@ -150,7 +150,7 @@ def main():
     cla = OneVsOneClassifier(gnb)
     cla.fit(X_train, y_train)
     predictions = cla.predict(X_test)
-    np.savetxt('ecocova_pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
+    np.savetxt('ecocovo_pred.csv', predictions.astype(int), fmt='%i', delimiter=",")
     # print predictions
     print 'ecoc'
     print zero_one_loss(predictions, y_test)
